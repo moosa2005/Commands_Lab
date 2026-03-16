@@ -1,0 +1,128 @@
+.generator-card {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: var(--glass-blur);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.generator-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(0, 255, 204, 0.1) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.generator-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 255, 204, 0.4);
+  background-color: var(--bg-card-hover);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 204, 0.1);
+}
+
+.generator-card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.icon-wrapper {
+  background-color: rgba(0, 255, 204, 0.08);
+  padding: 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 255, 204, 0.2);
+  transform: scale(1.05) rotate(-5deg);
+}
+
+.card-icon {
+  color: var(--accent-neon);
+  transition: color 0.4s ease;
+}
+
+.generator-card:hover .card-icon {
+  color: #000;
+}
+
+.card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.025em;
+  font-family: var(--font-sans);
+  transition: color 0.3s ease;
+}
+
+.generator-card:hover .card-title {
+  color: var(--accent-neon);
+}
+
+.card-description {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 1.75rem 0;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.3s ease;
+}
+
+.generator-card:hover .card-footer {
+  border-color: rgba(0, 255, 204, 0.2);
+}
+
+.card-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-secondary);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.card-action {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.generator-card:hover .card-action {
+  opacity: 1;
+  color: var(--accent-neon);
+  transform: translateX(4px);
+}
