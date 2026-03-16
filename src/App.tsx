@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import GeneratorsList from './pages/GeneratorsList'
 import GeneratorDetail from './pages/GeneratorDetail'
@@ -8,6 +9,7 @@ import GeneratorDetail from './pages/GeneratorDetail'
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="app-container">
         <Navbar />
         <main className="main-content">

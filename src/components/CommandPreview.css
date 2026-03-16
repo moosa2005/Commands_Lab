@@ -102,9 +102,10 @@
 }
 
 .command-preview-body {
-  padding: 1.5rem 1rem;
+  padding: 1.25rem 0.75rem;
   overflow-x: auto;
   position: relative;
+  max-width: 100%;
 }
 
 @media (min-width: 640px) {
