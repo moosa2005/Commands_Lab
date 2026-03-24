@@ -25,9 +25,12 @@ export default function Navbar() {
           </a>
         </nav>
         
-        <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle Menu">
-          <Menu size={24} />
-        </button>
+        {/* Only show hamburger icon if menu is closed to prevent overlapping and confusion */}
+        {!isOpen && (
+          <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle Menu" style={{ padding: '0.75rem', touchAction: 'manipulation' }}>
+            <Menu size={28} />
+          </button>
+        )}
       </div>
 
       {/* Mobile Menu Overlay */}

@@ -5,7 +5,6 @@
   padding-bottom: 4rem;
 }
 
-/* Hero Section */
 .hero-section {
   display: flex;
   flex-direction: column;
@@ -13,6 +12,8 @@
   text-align: center;
   padding: 6rem 1rem 4rem;
   position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 
 .hero-section::before {
