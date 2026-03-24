@@ -30,5 +30,11 @@ export const categories: Category[] = [
     name: 'Utilities',
     description: 'General purpose tools like Curl, encoding, and baselining.',
     iconName: 'Wrench'
+  },
+  {
+    id: 'wordlist-generation',
+    name: 'Wordlist Generation',
+    description: 'Create custom wordlists and dictionaries for brute force and password attacks.',
+    iconName: 'BookText'
   }
 ];

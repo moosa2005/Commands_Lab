@@ -12,6 +12,7 @@ import { reverseShellGenerator } from './reverseShell';
 import { curlGenerator } from './curl';
 import { base64Generator } from './base64';
 import { bashGenerator } from './bash';
+import { wordlistGenerator } from './wordlist';
 import type { GeneratorConfig } from '../../types/generator';
 
 export const allGenerators: GeneratorConfig[] = [
@@ -28,5 +29,6 @@ export const allGenerators: GeneratorConfig[] = [
   reverseShellGenerator,
   curlGenerator,
   base64Generator,
-  bashGenerator
+  bashGenerator,
+  wordlistGenerator
 ];
