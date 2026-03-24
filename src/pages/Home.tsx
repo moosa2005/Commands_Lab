@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Terminal, Shield, Zap, Search } from 'lucide-react';
 import GeneratorCard from '../components/GeneratorCard';
 import { allGenerators } from '../data/generators';
+import { useSEO } from '../hooks/useSEO';
 import './Home.css';
 
 export default function Home() {
+  useSEO('Home', 'Welcome to CommandsLab - The Ultimate Cybersecurity Command Generator.');
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 

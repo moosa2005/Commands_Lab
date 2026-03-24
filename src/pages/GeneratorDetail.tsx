@@ -4,12 +4,18 @@ import * as Icons from 'lucide-react';
 import FormEngine from '../components/FormEngine';
 import { allGenerators } from '../data/generators';
 import { categories } from '../data/categories';
+import { useSEO } from '../hooks/useSEO';
 import './GeneratorDetail.css';
 
 export default function GeneratorDetail() {
   const { id } = useParams<{ id: string }>();
   
   const generator = allGenerators.find(g => g.id === id);
+
+  useSEO(
+    generator ? generator.name : 'Tool Not Found',
+    generator ? generator.description : 'The command generator you are looking for does not exist.'
+  );
 
   if (!generator) {
     return (

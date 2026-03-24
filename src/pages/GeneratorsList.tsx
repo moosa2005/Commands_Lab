@@ -4,9 +4,11 @@ import { Search } from 'lucide-react';
 import GeneratorCard from '../components/GeneratorCard';
 import { allGenerators } from '../data/generators';
 import { categories } from '../data/categories';
+import { useSEO } from '../hooks/useSEO';
 import './GeneratorsList.css';
 
 export default function GeneratorsList() {
+  useSEO('Tools Directory', 'Browse all available penetration testing utilities and command generators.');
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParam = searchParams.get('q') || '';
   

@@ -101,11 +101,6 @@ export default function FormEngine({ generator }: FormEngineProps) {
 
   return (
     <div className="form-engine-container">
-      <div className="command-preview-section">
-        <h2 className="section-title">Generated Command</h2>
-        <CommandPreview command={currentCommand} />
-      </div>
-
       <div className="form-section">
         <h2 className="section-title">Configure Options</h2>
         <form className="generator-form" onSubmit={(e) => e.preventDefault()}>
@@ -113,6 +108,11 @@ export default function FormEngine({ generator }: FormEngineProps) {
             {generator.fields.map(renderField)}
           </div>
         </form>
+      </div>
+
+      <div className="command-preview-section">
+        <h2 className="section-title">Generated Command</h2>
+        <CommandPreview command={currentCommand} />
       </div>
 
       <div className="explanation-section">
