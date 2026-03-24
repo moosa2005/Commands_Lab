@@ -26,7 +26,7 @@ export default function Navbar() {
         </nav>
         
         <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle Menu">
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <Menu size={24} />
         </button>
       </div>
 
@@ -34,6 +34,13 @@ export default function Navbar() {
       {isOpen && (
         <div className="mobile-menu-overlay" onClick={closeMenu}>
           <nav className="mobile-menu" onClick={e => e.stopPropagation()}>
+            <div className="mobile-menu-header">
+              <span className="mobile-menu-title">Menu</span>
+              <button className="mobile-menu-close" onClick={closeMenu} aria-label="Close Menu">
+                <X size={24} />
+              </button>
+            </div>
+            
             <Link to="/generators" className="mobile-nav-link" onClick={closeMenu}>Tools Directory</Link>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mobile-nav-link" onClick={closeMenu}>
               <Github size={20} /> GitHub Project
