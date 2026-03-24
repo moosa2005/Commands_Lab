@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Download, Play, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Download, AlertTriangle } from 'lucide-react';
 import { useSEO } from '../hooks/useSEO';
 import './WordlistGenerator.css';
 
@@ -54,7 +54,7 @@ export default function WordlistGenerator() {
 
   const estimate = calculateEstimate();
 
-  const generateAndDownload = useCallback(async () => {
+  const generateAndDownload = useCallback(() => {
     setError('');
     const charset = getCharset();
     
@@ -70,89 +70,61 @@ export default function WordlistGenerator() {
       setError('Minimum length must be at least 1.');
       return;
     }
+    if (calculateEstimate() > 50000000) {
+      // Hard cap at 50 million to prevent users crashing their own machines with multi-gigabyte files
+      setError('Combinations exceed 50,000,000 (File > 500MB). This will crash your browser. Please reduce length or charset.');
+      return;
+    }
 
     setIsGenerating(true);
-    setProgress('Generating wordlist...');
+    setProgress('Starting background worker...');
 
-    const chars = charset.split('');
-    const chunks: string[] = [];
-    let buffer = '';
-    let count = 0;
-    const CHUNK_SIZE = 10000; // flush buffer every 10k words
-
-    // Use setTimeout trick to keep UI responsive
-    await new Promise<void>((resolve) => {
-      const processLength = (len: number, lengthIndex: number) => {
-        const indices = new Array(len).fill(0);
-        
-        const processBatch = () => {
-          const batchLimit = 50000; // process 50k words per frame
-          let batchCount = 0;
-
-          while (batchCount < batchLimit) {
-            // Build word
-            let word = prefix;
-            for (let i = 0; i < len; i++) {
-              word += chars[indices[i]];
-            }
-            word += suffix;
-            buffer += word + '\n';
-            count++;
-            batchCount++;
-
-            if (count % CHUNK_SIZE === 0) {
-              chunks.push(buffer);
-              buffer = '';
-              setProgress(`Generated ${count.toLocaleString()} words...`);
-            }
-
-            // Increment indices
-            let pos = len - 1;
-            while (pos >= 0) {
-              indices[pos]++;
-              if (indices[pos] < chars.length) break;
-              indices[pos] = 0;
-              pos--;
-            }
-            if (pos < 0) {
-              // Done with this length
-              if (lengthIndex < maxLen - minLen) {
-                setProgress(`Generated ${count.toLocaleString()} words... (length ${len + 1})`);
-                setTimeout(() => processLength(len + 1, lengthIndex + 1), 0);
-              } else {
-                // All done
-                if (buffer) chunks.push(buffer);
-                setProgress(`Done! ${count.toLocaleString()} words generated. Preparing download...`);
-                setTimeout(() => resolve(), 0);
-              }
-              return;
-            }
-          }
-
-          // Yield to UI thread, then continue
-          setTimeout(processBatch, 0);
-        };
-
-        processBatch();
-      };
-
-      processLength(minLen, 0);
+    // Initialize Web Worker
+    const worker = new Worker(new URL('../workers/wordlist.worker.ts', import.meta.url), {
+      type: 'module'
     });
 
-    // Download
-    const blob = new Blob(chunks, { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'wordlist.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    worker.onmessage = (e) => {
+      if (e.data.type === 'progress') {
+        setProgress(`Generated ${e.data.count.toLocaleString()} words... (processing length ${e.data.len})`);
+      } else if (e.data.type === 'done') {
+        setProgress(`Compiling ${e.data.count.toLocaleString()} words for download...`);
+        
+        // Use chunks to build the Blob efficiently
+        const blob = new Blob(e.data.chunks, { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'commands-lab-wordlist.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
 
-    setProgress(`✅ Downloaded ${count.toLocaleString()} words successfully!`);
-    setIsGenerating(false);
-  }, [getCharset, minLen, maxLen, prefix, suffix]);
+        setProgress(`✅ Downloaded ${e.data.count.toLocaleString()} words successfully!`);
+        setIsGenerating(false);
+        worker.terminate();
+      }
+    };
+
+    worker.onerror = (err) => {
+      console.error('Worker error:', err);
+      setError('An error occurred during generation.');
+      setIsGenerating(false);
+      setProgress('');
+      worker.terminate();
+    };
+
+    // Start processing
+    worker.postMessage({
+      minLen,
+      maxLen,
+      charset,
+      prefix,
+      suffix
+    });
+
+  }, [getCharset, minLen, maxLen, prefix, suffix, calculateEstimate]);
 
   return (
     <div className="wl-container">
