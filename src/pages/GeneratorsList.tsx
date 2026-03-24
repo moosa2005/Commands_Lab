@@ -8,7 +8,19 @@ import { useSEO } from '../hooks/useSEO';
 import './GeneratorsList.css';
 
 export default function GeneratorsList() {
-  useSEO('Tools Directory', 'Browse all available penetration testing utilities and command generators.');
+  useSEO({
+    title: 'All Pentesting & Hacking Command Generators',
+    description: 'Browse our complete collection of free cybersecurity command generators: Nmap, SQLMap, Hydra, Hashcat, Metasploit, reverse shells, Gobuster, FFUF, and more. Generate commands instantly without memorizing syntax.',
+    keywords: 'pentesting tools list, hacking command generators, cybersecurity tools directory, nmap sqlmap hydra hashcat metasploit commands, free hacking tools online, penetration testing cheat sheet',
+    canonical: '/generators',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      'name': 'Pentesting Command Generators Directory',
+      'url': 'https://commandslab.com/generators',
+      'description': 'Complete collection of free cybersecurity command generators for penetration testing.'
+    }
+  });
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParam = searchParams.get('q') || '';
   

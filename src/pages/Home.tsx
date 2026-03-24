@@ -7,7 +7,22 @@ import { useSEO } from '../hooks/useSEO';
 import './Home.css';
 
 export default function Home() {
-  useSEO('Home', 'Welcome to CommandsLab - The Ultimate Cybersecurity Command Generator.');
+  useSEO({
+    title: 'Free Cybersecurity & Pentesting Command Generator',
+    description: 'Generate complex Nmap, SQLMap, Hydra, Metasploit, reverse shell and other penetration testing commands instantly. Free online tool for ethical hackers and security professionals. No signup required.',
+    keywords: 'nmap command generator, pentesting tools online, cybersecurity command builder, ethical hacking tools free, kali linux command generator, penetration testing commands, reverse shell cheat sheet, sqlmap tutorial commands',
+    canonical: '/',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      'name': 'CommandsLab',
+      'url': 'https://commandslab.com',
+      'applicationCategory': 'SecurityApplication',
+      'operatingSystem': 'Web Browser',
+      'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+      'description': 'Free online cybersecurity command generator for penetration testing professionals.'
+    }
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 

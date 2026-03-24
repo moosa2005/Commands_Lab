@@ -12,10 +12,30 @@ export default function GeneratorDetail() {
   
   const generator = allGenerators.find(g => g.id === id);
 
-  useSEO(
-    generator ? generator.name : 'Tool Not Found',
-    generator ? generator.description : 'The command generator you are looking for does not exist.'
-  );
+  useSEO({
+    title: generator
+      ? `${generator.name} Command Generator - Free Online Tool`
+      : 'Tool Not Found',
+    description: generator
+      ? `Generate ${generator.name} commands instantly with our free online tool. ${generator.description} No memorization needed — just configure and copy.`
+      : 'The command generator you are looking for does not exist.',
+    keywords: generator
+      ? `${generator.name.toLowerCase()} command generator, ${generator.name.toLowerCase()} syntax, ${generator.name.toLowerCase()} cheat sheet, ${generator.name.toLowerCase()} tutorial, ${generator.name.toLowerCase()} options, pentesting commands`
+      : undefined,
+    canonical: generator ? `/generators/${generator.id}` : undefined,
+    structuredData: generator
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          'name': `${generator.name} Command Generator`,
+          'url': `https://commandslab.com/generators/${generator.id}`,
+          'applicationCategory': 'SecurityApplication',
+          'operatingSystem': 'Web Browser',
+          'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+          'description': generator.description
+        }
+      : undefined
+  });
 
   if (!generator) {
     return (
