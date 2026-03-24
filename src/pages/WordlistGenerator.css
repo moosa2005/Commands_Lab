@@ -1,0 +1,336 @@
+.wl-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@media (min-width: 640px) {
+  .wl-container {
+    padding: 3rem 2rem;
+  }
+}
+
+.wl-header {
+  margin-bottom: 2.5rem;
+}
+
+.wl-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.wl-subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+.wl-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .wl-layout {
+    grid-template-columns: 420px 1fr;
+  }
+}
+
+/* Config Panel */
+.wl-config-panel {
+  background-color: rgba(20, 20, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: fit-content;
+}
+
+@media (min-width: 640px) {
+  .wl-config-panel {
+    padding: 2rem;
+  }
+}
+
+.wl-section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wl-section-title::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 18px;
+  background-color: var(--accent-neon);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--accent-neon-glow);
+}
+
+.wl-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.wl-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wl-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.wl-input {
+  background-color: rgba(10, 10, 12, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.wl-input:focus {
+  outline: none;
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.15);
+}
+
+.wl-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.wl-help {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Charset Checkboxes */
+.wl-charset-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wl-checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.wl-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.wl-checkbox-label:hover {
+  border-color: rgba(0, 255, 204, 0.2);
+}
+
+.wl-checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.wl-checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.wl-checkbox-label input:checked ~ .wl-checkbox-custom {
+  background-color: var(--accent-neon);
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+}
+
+.wl-checkbox-label input:checked ~ .wl-checkbox-custom::after {
+  content: '';
+  width: 5px;
+  height: 10px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
+.wl-charset-hint {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+/* Estimate */
+.wl-estimate {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: rgba(0, 255, 204, 0.05);
+  border: 1px solid rgba(0, 255, 204, 0.15);
+  color: var(--accent-neon);
+  font-size: 0.9rem;
+}
+
+.wl-estimate-danger {
+  background-color: rgba(255, 0, 85, 0.08);
+  border-color: rgba(255, 0, 85, 0.3);
+  color: var(--accent-secondary);
+}
+
+.wl-error {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: rgba(255, 0, 85, 0.08);
+  border: 1px solid rgba(255, 0, 85, 0.3);
+  color: var(--accent-secondary);
+  font-size: 0.9rem;
+}
+
+/* Action Buttons */
+.wl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.wl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: none;
+}
+
+.wl-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.wl-btn-generate {
+  background: linear-gradient(135deg, var(--accent-neon) 0%, #00b38f 100%);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  flex: 1;
+  justify-content: center;
+}
+
+.wl-btn-generate:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
+}
+
+.wl-btn-download {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wl-btn-download:hover {
+  border-color: var(--accent-neon);
+  color: var(--accent-neon);
+  transform: translateY(-2px);
+}
+
+.wl-btn-clear {
+  background-color: rgba(255, 0, 85, 0.08);
+  color: var(--accent-secondary);
+  border: 1px solid rgba(255, 0, 85, 0.2);
+}
+
+.wl-btn-clear:hover {
+  background-color: rgba(255, 0, 85, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Output Panel */
+.wl-output-panel {
+  background-color: #030303;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.wl-output-header {
+  padding: 1rem 1.5rem;
+  background-color: rgba(20, 20, 25, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wl-output-body {
+  flex: 1;
+  overflow: auto;
+  padding: 1rem 1.5rem;
+  max-height: 70vh;
+}
+
+.wl-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 300px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.wl-empty-state strong {
+  color: var(--accent-neon);
+}
+
+.wl-output-text {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent-neon);
+  line-height: 1.5;
+  white-space: pre;
+  margin: 0;
+  text-shadow: 0 0 3px rgba(0, 255, 204, 0.2);
+}

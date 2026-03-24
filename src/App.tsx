@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home'
 import GeneratorsList from './pages/GeneratorsList'
 import GeneratorDetail from './pages/GeneratorDetail'
+import WordlistGenerator from './pages/WordlistGenerator'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/generators" element={<GeneratorsList />} />
             <Route path="/generators/:id" element={<GeneratorDetail />} />
+            <Route path="/wordlist-generator" element={<WordlistGenerator />} />
           </Routes>
         </main>
         <Footer />

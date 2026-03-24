@@ -19,6 +19,7 @@ export default function Navbar() {
         
         <nav className="navbar-links">
           <Link to="/generators" className="nav-link">Tools</Link>
+          <Link to="/wordlist-generator" className="nav-link">Wordlist</Link>
           <a href="https://github.com/moosa2005" target="_blank" rel="noopener noreferrer" className="nav-link icon-link">
             <Github size={20} />
             <span className="sr-only">GitHub</span>
@@ -45,6 +46,7 @@ export default function Navbar() {
             </div>
             
             <Link to="/generators" className="mobile-nav-link" onClick={closeMenu}>Tools Directory</Link>
+            <Link to="/wordlist-generator" className="mobile-nav-link" onClick={closeMenu}>Wordlist Generator</Link>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mobile-nav-link" onClick={closeMenu}>
               <Github size={20} /> GitHub Project
             </a>
