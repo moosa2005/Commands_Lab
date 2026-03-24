@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Download, Play, Trash2, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Download, Play, AlertTriangle } from 'lucide-react';
 import { useSEO } from '../hooks/useSEO';
 import './WordlistGenerator.css';
 
@@ -10,8 +10,6 @@ const CHARSETS: Record<string, string> = {
   numbers: '0123456789',
   special: '!@#$%^&*()-_=+[]{}|;:,.<>?',
 };
-
-const MAX_WORDS = 50000;
 
 export default function WordlistGenerator() {
   useSEO({
@@ -30,10 +28,9 @@ export default function WordlistGenerator() {
   const [customChars, setCustomChars] = useState('');
   const [prefix, setPrefix] = useState('');
   const [suffix, setSuffix] = useState('');
-  const [words, setWords] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState('');
-  const [estimatedCount, setEstimatedCount] = useState(0);
+  const [progress, setProgress] = useState('');
 
   const getCharset = useCallback(() => {
     let charset = '';
@@ -42,7 +39,6 @@ export default function WordlistGenerator() {
     if (useNumbers) charset += CHARSETS.numbers;
     if (useSpecial) charset += CHARSETS.special;
     if (customChars) charset += customChars;
-    // Remove duplicates
     return [...new Set(charset.split(''))].join('');
   }, [useLowercase, useUppercase, useNumbers, useSpecial, customChars]);
 
@@ -56,10 +52,9 @@ export default function WordlistGenerator() {
     return total;
   }, [getCharset, minLen, maxLen]);
 
-  // Update estimate whenever inputs change
   const estimate = calculateEstimate();
 
-  const generateWordlist = useCallback(() => {
+  const generateAndDownload = useCallback(async () => {
     setError('');
     const charset = getCharset();
     
@@ -67,61 +62,85 @@ export default function WordlistGenerator() {
       setError('Please select at least one character set.');
       return;
     }
-
     if (minLen > maxLen) {
       setError('Minimum length cannot be greater than maximum length.');
       return;
     }
-
     if (minLen < 1) {
       setError('Minimum length must be at least 1.');
       return;
     }
 
-    const total = calculateEstimate();
-    if (total > MAX_WORDS) {
-      setError(`Too many combinations (${total.toLocaleString()}). Maximum allowed is ${MAX_WORDS.toLocaleString()}. Try reducing length or character set.`);
-      return;
-    }
-
     setIsGenerating(true);
-    const result: string[] = [];
+    setProgress('Generating wordlist...');
+
     const chars = charset.split('');
+    const chunks: string[] = [];
+    let buffer = '';
+    let count = 0;
+    const CHUNK_SIZE = 10000; // flush buffer every 10k words
 
-    // Generate all combinations for each length
-    for (let len = minLen; len <= maxLen; len++) {
-      const indices = new Array(len).fill(0);
-      
-      while (true) {
-        // Build current word
-        let word = prefix;
-        for (let i = 0; i < len; i++) {
-          word += chars[indices[i]];
-        }
-        word += suffix;
-        result.push(word);
+    // Use setTimeout trick to keep UI responsive
+    await new Promise<void>((resolve) => {
+      const processLength = (len: number, lengthIndex: number) => {
+        const indices = new Array(len).fill(0);
+        
+        const processBatch = () => {
+          const batchLimit = 50000; // process 50k words per frame
+          let batchCount = 0;
 
-        // Increment indices (like counting in base N)
-        let pos = len - 1;
-        while (pos >= 0) {
-          indices[pos]++;
-          if (indices[pos] < chars.length) break;
-          indices[pos] = 0;
-          pos--;
-        }
-        if (pos < 0) break;
-      }
-    }
+          while (batchCount < batchLimit) {
+            // Build word
+            let word = prefix;
+            for (let i = 0; i < len; i++) {
+              word += chars[indices[i]];
+            }
+            word += suffix;
+            buffer += word + '\n';
+            count++;
+            batchCount++;
 
-    setWords(result);
-    setEstimatedCount(result.length);
-    setIsGenerating(false);
-  }, [getCharset, minLen, maxLen, prefix, suffix, calculateEstimate]);
+            if (count % CHUNK_SIZE === 0) {
+              chunks.push(buffer);
+              buffer = '';
+              setProgress(`Generated ${count.toLocaleString()} words...`);
+            }
 
-  const downloadWordlist = useCallback(() => {
-    if (!words.length) return;
-    const content = words.join('\n');
-    const blob = new Blob([content], { type: 'text/plain' });
+            // Increment indices
+            let pos = len - 1;
+            while (pos >= 0) {
+              indices[pos]++;
+              if (indices[pos] < chars.length) break;
+              indices[pos] = 0;
+              pos--;
+            }
+            if (pos < 0) {
+              // Done with this length
+              if (lengthIndex < maxLen - minLen) {
+                setProgress(`Generated ${count.toLocaleString()} words... (length ${len + 1})`);
+                setTimeout(() => processLength(len + 1, lengthIndex + 1), 0);
+              } else {
+                // All done
+                if (buffer) chunks.push(buffer);
+                setProgress(`Done! ${count.toLocaleString()} words generated. Preparing download...`);
+                setTimeout(() => resolve(), 0);
+              }
+              return;
+            }
+          }
+
+          // Yield to UI thread, then continue
+          setTimeout(processBatch, 0);
+        };
+
+        processBatch();
+      };
+
+      processLength(minLen, 0);
+    });
+
+    // Download
+    const blob = new Blob(chunks, { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -130,13 +149,10 @@ export default function WordlistGenerator() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  }, [words]);
 
-  const clearWords = () => {
-    setWords([]);
-    setEstimatedCount(0);
-    setError('');
-  };
+    setProgress(`✅ Downloaded ${count.toLocaleString()} words successfully!`);
+    setIsGenerating(false);
+  }, [getCharset, minLen, maxLen, prefix, suffix]);
 
   return (
     <div className="wl-container">
@@ -149,13 +165,12 @@ export default function WordlistGenerator() {
           Wordlist <span className="text-neon">Generator</span>
         </h1>
         <p className="wl-subtitle">
-          Generate custom wordlists directly in your browser. Configure character sets, 
-          length ranges, and prefixes to create targeted password dictionaries for pentesting.
+          Generate unlimited custom wordlists directly in your browser. Configure character sets, 
+          length, and prefixes — then download instantly as a .txt file.
         </p>
       </div>
 
-      <div className="wl-layout">
-        {/* Configuration Panel */}
+      <div className="wl-single-panel">
         <div className="wl-config-panel">
           <h2 className="wl-section-title">Configuration</h2>
 
@@ -167,7 +182,7 @@ export default function WordlistGenerator() {
                 className="wl-input"
                 value={minLen}
                 min={1}
-                max={10}
+                max={20}
                 onChange={e => setMinLen(parseInt(e.target.value) || 1)}
               />
             </div>
@@ -178,7 +193,7 @@ export default function WordlistGenerator() {
                 className="wl-input"
                 value={maxLen}
                 min={1}
-                max={10}
+                max={20}
                 onChange={e => setMaxLen(parseInt(e.target.value) || 1)}
               />
             </div>
@@ -219,7 +234,7 @@ export default function WordlistGenerator() {
               value={customChars}
               onChange={e => setCustomChars(e.target.value)}
             />
-            <p className="wl-help">Additional characters to include in generation.</p>
+            <p className="wl-help">Additional characters to include.</p>
           </div>
 
           <div className="wl-form-grid">
@@ -248,59 +263,33 @@ export default function WordlistGenerator() {
           </div>
 
           {/* Estimate */}
-          <div className={`wl-estimate ${estimate > MAX_WORDS ? 'wl-estimate-danger' : ''}`}>
-            {estimate > MAX_WORDS && <AlertTriangle size={16} />}
+          <div className={`wl-estimate ${estimate > 10000000 ? 'wl-estimate-warning' : ''}`}>
+            {estimate > 10000000 && <AlertTriangle size={16} />}
             <span>
               Estimated: <strong>{estimate.toLocaleString()}</strong> words
-              {estimate > MAX_WORDS && ` (max ${MAX_WORDS.toLocaleString()})`}
+              {estimate > 10000000 && ' — large file, may take a while'}
             </span>
           </div>
 
           {error && <div className="wl-error">{error}</div>}
 
-          {/* Action Buttons */}
+          {progress && !error && (
+            <div className="wl-progress">{progress}</div>
+          )}
+
+          {/* Action Button */}
           <div className="wl-actions">
             <button
               className="wl-btn wl-btn-generate"
-              onClick={generateWordlist}
-              disabled={isGenerating || estimate > MAX_WORDS || estimate === 0}
+              onClick={generateAndDownload}
+              disabled={isGenerating || estimate === 0}
             >
-              <Play size={18} />
-              {isGenerating ? 'Generating...' : 'Generate Wordlist'}
+              {isGenerating ? (
+                <><span className="wl-spinner"></span> Generating...</>
+              ) : (
+                <><Download size={18} /> Generate & Download</>
+              )}
             </button>
-            {words.length > 0 && (
-              <>
-                <button className="wl-btn wl-btn-download" onClick={downloadWordlist}>
-                  <Download size={18} />
-                  Download .txt
-                </button>
-                <button className="wl-btn wl-btn-clear" onClick={clearWords}>
-                  <Trash2 size={18} />
-                  Clear
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Output / Preview Panel */}
-        <div className="wl-output-panel">
-          <div className="wl-output-header">
-            <h2 className="wl-section-title">
-              {words.length > 0 ? `Output (${estimatedCount.toLocaleString()} words)` : 'Output Preview'}
-            </h2>
-          </div>
-          <div className="wl-output-body">
-            {words.length === 0 ? (
-              <div className="wl-empty-state">
-                <p>Configure your settings and click <strong>Generate Wordlist</strong> to see results here.</p>
-              </div>
-            ) : (
-              <pre className="wl-output-text">
-                {words.slice(0, 500).join('\n')}
-                {words.length > 500 && `\n\n... and ${(words.length - 500).toLocaleString()} more words (download to see all)`}
-              </pre>
-            )}
           </div>
         </div>
       </div>
