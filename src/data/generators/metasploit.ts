@@ -51,20 +51,25 @@ export const metasploitGenerator: GeneratorConfig = {
     }
   ],
   generateCommand: (values: any) => {
-    const parts = ['msfconsole'];
-    if (values.quiet) parts.push('-q');
-    
-    const cmds = [];
-    if (values.module) cmds.push(`use ${values.module}`);
-    if (values.rhosts) cmds.push(`set RHOSTS ${values.rhosts}`);
-    if (values.lhost) cmds.push(`set LHOST ${values.lhost}`);
-    if (values.payload) cmds.push(`set PAYLOAD ${values.payload}`);
-    cmds.push('run');
-    
-    if (cmds.length > 0) {
-      parts.push(`-x "${cmds.join('; ')}"`);
-    }
-    
+    const parts = [`msfconsole -x "use ${values.module || '<module>'};`];
+    if (values.payload) parts.push(`set PAYLOAD ${values.payload};`);
+    if (values.rhosts) parts.push(`set RHOSTS ${values.rhosts};`);
+    if (values.lhost) parts.push(`set LHOST ${values.lhost};`);
+    // Note: The original fields did not include 'lport'. If 'lport' is intended,
+    // it should be added to the 'fields' array as well.
+    // if (values.lport) parts.push(`set LPORT ${values.lport};`);
+    parts.push('run"');
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'Metasploit Command Generator - MSFconsole Exploit Automation',
+    description: 'Create Metasploit msfconsole commands to automate exploit execution and payload delivery. The world most used penetration testing framework.',
+    keywords: ['metasploit generator', 'msfconsole syntax', 'automated exploitation', 'metasploit framework', 'pentest automation']
+  },
+  additionalContent: [
+    {
+      title: 'About Metasploit Framework',
+      content: `The Metasploit Framework (MSF) is an open-source tool for developing, testing, and executing exploits. It contains thousands of modules for scanning, exploitation, and post-exploitation.`
+    }
+  ]
 };

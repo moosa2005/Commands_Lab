@@ -60,14 +60,22 @@ export const payloadGenerator: GeneratorConfig = {
     }
   ],
   generateCommand: (values: any) => {
-    const parts = ['msfvenom'];
-    
-    if (values.payload) parts.push(`-p ${values.payload}`);
+    const parts = ['msfvenom', '-p', values.payload || 'windows/meterpreter/reverse_tcp'];
     if (values.lhost) parts.push(`LHOST=${values.lhost}`);
     if (values.lport) parts.push(`LPORT=${values.lport}`);
     if (values.format) parts.push(`-f ${values.format}`);
     if (values.output) parts.push(`-o ${values.output}`);
-    
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'Metasploit Payload Generator - Custom MSFvenom Payloads',
+    description: 'Create custom Metasploit payloads for various architectures and platforms. Easy-to-use GUI for complex msfvenom commands.',
+    keywords: ['metasploit payload generator', 'msfvenom GUI', 'reverse tcp payload', 'meterpreter generator', 'custom shellcode']
+  },
+  additionalContent: [
+    {
+      title: 'Payload Selection',
+      content: `Choosing the right payload is critical. Staged payloads (like reverse_tcp) are smaller as they only include the 'stager' that downloads the rest. Non-staged payloads (like reverse_tcp_uuid) include the entire code but are larger.`
+    }
+  ]
 };

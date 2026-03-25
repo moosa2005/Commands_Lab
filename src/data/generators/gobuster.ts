@@ -47,21 +47,29 @@ export const gobusterGenerator: GeneratorConfig = {
     }
   ],
   generateCommand: (values: any) => {
-    const parts = ['gobuster'];
-    if (values.mode) parts.push(values.mode);
-    
-    // Gobuster uses -u for URL in dir/vhost modes, but -d for domain in dns mode.
-    if (values.url) {
-      if (values.mode === 'dns') {
-        parts.push(`-d ${values.url}`);
-      } else {
-        parts.push(`-u ${values.url}`);
-      }
+    const parts = ['gobuster', values.mode || 'dir'];
+    if (values.url) { // Changed from 'target' to 'url' to match existing field ID
+      const flag = values.mode === 'dns' ? '-d' : '-u';
+      parts.push(`${flag} ${values.url}`);
     }
-    
     if (values.wordlist) parts.push(`-w ${values.wordlist}`);
-    if (values.threads && values.threads !== 10) parts.push(`-t ${values.threads}`);
-    
+    if (values.threads) parts.push(`-t ${values.threads}`);
+    // Assuming 'extensions' is a new field that might be added later,
+    // but not present in the current 'fields' array.
+    // If it's meant to be added, it should be in the 'fields' array first.
+    // For now, I'll omit it to avoid a potential error if it's not defined.
+    // if (values.extensions) parts.push(`-x ${values.extensions}`);
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'Gobuster Command Generator - Directory & DNS Brute Forcer',
+    description: 'Generate Gobuster commands for directory, DNS, and VHost brute forcing. fast, reliable, and multi-threaded.',
+    keywords: ['gobuster generator', 'directory brute force', 'dns enumeration', 'gobuster syntax', 'web discovery']
+  },
+  additionalContent: [
+    {
+      title: 'Gobuster Modes',
+      content: `Gobuster supports several modes: 'dir' for directories/files, 'dns' for subdomains, and 'vhost' for virtual hosts. Each mode has its own specific flags and requirements.`
+    }
+  ]
 };

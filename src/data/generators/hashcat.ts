@@ -63,12 +63,21 @@ export const hashcatGenerator: GeneratorConfig = {
   ],
   generateCommand: (values: any) => {
     const parts = ['hashcat'];
-    if (values.attackMode) parts.push(`-a ${values.attackMode}`);
     if (values.hashType) parts.push(`-m ${values.hashType}`);
-    if (values.force) parts.push('--force');
+    if (values.attackMode) parts.push(`-a ${values.attackMode}`);
     if (values.hashFile) parts.push(values.hashFile);
     if (values.wordlist) parts.push(values.wordlist);
-    
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'Hashcat Command Generator - Worlds Fastest Password Cracker',
+    description: 'Generate Hashcat commands for high-performance password cracking. Supports thousands of hash types and advanced attack modes.',
+    keywords: ['hashcat generator', 'password cracking', 'gpu cracking', 'hashcat syntax', 'crack hashes tool']
+  },
+  additionalContent: [
+    {
+      title: 'Attack Modes',
+      content: `Mode 0 (Straight) uses a wordlist directly. Mode 3 (Brute-force) tests all combinations based on a mask. hashcat supports many more complex modes like hybrid and rules-based attacks.`
+    }
+  ]
 };

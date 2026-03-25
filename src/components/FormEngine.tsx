@@ -121,6 +121,13 @@ export default function FormEngine({ generator }: FormEngineProps) {
         
         <h3 className="subsection-title">Example Usage:</h3>
         <code className="example-block">{generator.exampleUsage}</code>
+
+        {generator.additionalContent && generator.additionalContent.map((item, index) => (
+          <div key={index} className="additional-info">
+            <h3 className="subsection-title">{item.title}</h3>
+            <p className="explanation-text">{item.content}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

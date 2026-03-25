@@ -13,15 +13,15 @@ export default function GeneratorDetail() {
   const generator = allGenerators.find(g => g.id === id);
 
   useSEO({
-    title: generator
+    title: generator?.seo?.title || (generator
       ? `${generator.name} Command Generator - Free Online Tool`
-      : 'Tool Not Found',
-    description: generator
+      : 'Tool Not Found'),
+    description: generator?.seo?.description || (generator
       ? `Generate ${generator.name} commands instantly with our free online tool. ${generator.description} No memorization needed — just configure and copy.`
-      : 'The command generator you are looking for does not exist.',
-    keywords: generator
+      : 'The command generator you are looking for does not exist.'),
+    keywords: generator?.seo?.keywords?.join(', ') || (generator
       ? `${generator.name.toLowerCase()} command generator, ${generator.name.toLowerCase()} syntax, ${generator.name.toLowerCase()} cheat sheet, ${generator.name.toLowerCase()} tutorial, ${generator.name.toLowerCase()} options, pentesting commands`
-      : undefined,
+      : undefined),
     canonical: generator ? `/generators/${generator.id}` : undefined,
     structuredData: generator
       ? {

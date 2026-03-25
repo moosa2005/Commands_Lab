@@ -89,5 +89,20 @@ export const nmapGenerator: GeneratorConfig = {
     parts.push(values.target || '<target>');
     
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'Nmap Command Generator - Network Scanner & Security Auditor',
+    description: 'Create custom Nmap commands for host discovery, port scanning, and OS detection. The most advanced online Nmap GUI/CLI generator.',
+    keywords: ['nmap command generator', 'nmap port scan', 'nmap host discovery', 'nmap script engine', 'nmap vulnerability scan', 'network mapper']
+  },
+  additionalContent: [
+    {
+      title: 'Common Nmap Scan Types',
+      content: 'Nmap supports several scan techniques. The TCP SYN scan (-sS) is the most popular because it is fast and relatively unobtrusive. If SYN scanning is not possible (due to user privileges), Nmap defaults to the TCP Connect scan (-sT).'
+    },
+    {
+      title: 'Using Nmap Scripting Engine (NSE)',
+      content: 'The Nmap Scripting Engine (NSE) allows you to automate a wide variety of networking tasks including vulnerability detection and advanced discovery. Use --script followed by the script name or category (e.g., vuln, default, discovery).'
+    }
+  ]
 };

@@ -16,6 +16,12 @@ export interface GeneratorField {
   required?: boolean;
 }
 
+export interface GeneratorSEO {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+}
+
 export interface GeneratorConfig {
   id: string;
   name: string;
@@ -26,6 +32,11 @@ export interface GeneratorConfig {
   generateCommand: (values: Record<string, any>) => string;
   exampleUsage: string;
   explanation: string;
+  seo?: GeneratorSEO;
+  additionalContent?: {
+    title: string;
+    content: string;
+  }[];
 }
 
 export interface Category {

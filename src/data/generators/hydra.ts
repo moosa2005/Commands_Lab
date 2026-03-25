@@ -77,14 +77,24 @@ export const hydraGenerator: GeneratorConfig = {
   ],
   generateCommand: (values: any) => {
     const parts = ['hydra'];
-    if (values.usernameType && values.username) parts.push(`${values.usernameType} ${values.username}`);
-    if (values.passwordType && values.password) parts.push(`${values.passwordType} ${values.password}`);
-    if (values.threads && values.threads !== 16) parts.push(`-t ${values.threads}`);
-    
-    if (values.service && values.target) {
-      parts.push(`${values.service}://${values.target}`);
-    }
-    
+    if (values.login) parts.push(`-l ${values.login}`);
+    if (values.password) parts.push(`-p ${values.password}`);
+    if (values.loginList) parts.push(`-L ${values.loginList}`);
+    if (values.passwordList) parts.push(`-P ${values.passwordList}`);
+    if (values.threads) parts.push(`-t ${values.threads}`);
+    if (values.target) parts.push(values.target);
+    if (values.service) parts.push(values.service);
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'Hydra Command Generator - Fast Network Login Cracker',
+    description: 'Generate Hydra commands for parallelized login brute forcing. Supports SSH, FTP, HTTP, Telnet, and many more protocols.',
+    keywords: ['hydra generator', 'network login cracker', 'brute force ssh', 'hydra syntax', 'parallelized cracker']
+  },
+  additionalContent: [
+    {
+      title: 'Hydra Performance',
+      content: `Hydra is incredibly fast because it performs parallelized login attempts. Use the -t flag carefully; too many threads might cause the target service to become unresponsive or block your IP.`
+    }
+  ]
 };

@@ -59,5 +59,16 @@ export const ffufGenerator: GeneratorConfig = {
     if (values.threads && values.threads !== 40) parts.push(`-t ${values.threads}`);
     if (values.filterStatus) parts.push(`-fc ${values.filterStatus}`);
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'ffuf Command Generator - Fast Web Fuzzer',
+    description: 'Create ffuf commands for high-speed directory discovery and fuzzying. Highly customizable and optimized for performance.',
+    keywords: ['ffuf generator', 'web fuzzer', 'directory discovery', 'fuzzing tool', 'ffuf syntax']
+  },
+  additionalContent: [
+    {
+      title: 'Filtering Results',
+      content: `Use the -fs (filter size), -fc (filter code), and -fw (filter words) options to remove noise from your results. This is essential when fuzzing targets that return the same response for all invalid paths.`
+    }
+  ]
 };

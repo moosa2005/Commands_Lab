@@ -44,5 +44,16 @@ export const bashGenerator: GeneratorConfig = {
       default:
         return `echo "Select a task strategy"`;
     }
-  }
+  },
+  seo: {
+    title: 'Bash One-Liner Generator - Essential Linux Commands',
+    description: 'Generate powerful Bash one-liners for loops, file searching, and text processing. Boost your productivity in the Linux terminal.',
+    keywords: ['bash generator', 'linux one-liners', 'bash loop command', 'grep one-liner', 'find command syntax']
+  },
+  additionalContent: [
+    {
+      title: 'Bash Productivity',
+      content: `Bash one-liners are powerful tools for automating repetitive tasks. Understanding how to combine commands using pipes and loops can significantly speed up your workflow in any Unix-like environment.`
+    }
+  ]
 };

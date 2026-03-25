@@ -36,5 +36,23 @@ export const categories: Category[] = [
     name: 'Wordlist Generation',
     description: 'Create custom wordlists and dictionaries for brute force and password attacks.',
     iconName: 'BookText'
+  },
+  {
+    id: 'osint',
+    name: 'OSINT',
+    description: 'Open-source intelligence tools for reconnaissance and information gathering.',
+    iconName: 'Search'
+  },
+  {
+    id: 'wireless-attacks',
+    name: 'Wireless Attacks',
+    description: 'Tools for auditing and attacking WiFi networks and wireless protocols.',
+    iconName: 'Wifi'
+  },
+  {
+    id: 'networking-sniffing',
+    name: 'Networking & Sniffing',
+    description: 'Analyze network traffic, capture packets, and perform MITM attacks.',
+    iconName: 'Activity'
   }
 ];

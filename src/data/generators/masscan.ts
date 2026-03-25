@@ -52,5 +52,20 @@ export const masscanGenerator: GeneratorConfig = {
     if (values.ping) parts.push('--ping=false');
     
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'Masscan Command Generator - Fast Internet Port Scanner',
+    description: 'Generate Masscan commands for high-speed network scanning. Scans the entire internet in under 6 minutes. Custom rates and port ranges supported.',
+    keywords: ['masscan generator', 'masscan syntax', 'fast port scanner', 'internet scale scanning', 'masscan tutorial', 'network discovery']
+  },
+  additionalContent: [
+    {
+      title: 'Why use Masscan?',
+      content: 'Masscan is designed for speed. While Nmap is better for detailed analysis of a few targets, Masscan is the king of breadth. It can scan the entire IPv4 space in minutes if your network bandwidth allows.'
+    },
+    {
+      title: 'Safe Scanning Rates',
+      content: 'Be careful with the --rate parameter. High rates (e.g., 100,000) can crash cheaper routers or trigger ISP alerts. Start low (1000) and increase as needed for your environment.'
+    }
+  ]
 };

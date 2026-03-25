@@ -64,10 +64,26 @@ export const sqlmapGenerator: GeneratorConfig = {
   generateCommand: (values: any) => {
     const parts = ['sqlmap'];
     if (values.url) parts.push(`-u "${values.url}"`);
-    if (values.level && values.level !== '--level=1') parts.push(values.level);
-    if (values.risk && values.risk !== '--risk=1') parts.push(values.risk);
-    if (values.action) parts.push(values.action);
+    if (values.risk) parts.push(`--risk ${values.risk}`);
+    if (values.level) parts.push(`--level ${values.level}`);
     if (values.batch) parts.push('--batch');
+    if (values.currentDb) parts.push('--current-db');
+    if (values.dump) parts.push('--dump');
     return parts.join(' ');
-  }
+  },
+  seo: {
+    title: 'SQLmap Command Generator - Automated SQL Injection Tool',
+    description: 'Create powerful SQLmap commands to detect and exploit SQL injection vulnerabilities automatically. Fast, customizable, and thorough.',
+    keywords: ['sqlmap generator', 'sql injection tool', 'database exploitation', 'automated sqli scannner', 'sqlmap syntax']
+  },
+  additionalContent: [
+    {
+      title: 'Warning: Use Responsibly',
+      content: `SQLmap is an extremely powerful tool that should only be used on systems you own or have explicit permission to test. Unauthorized use is illegal and unethical.`
+    },
+    {
+      title: 'Risk and Level Settings',
+      content: `--level (1-5) increases the number of tests/payloads. --risk (1-3) increases the risk of damaging the database or causing data loss. Level 5 and Risk 3 are the most thorough but most aggressive.`
+    }
+  ]
 };
