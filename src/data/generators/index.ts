@@ -16,7 +16,6 @@ import { dalfoxGenerator } from './dalfox';
 import { xsstrikeGenerator } from './xsstrike';
 import { medusaGenerator } from './medusa';
 import { cewlGenerator } from './cewl';
-import { msfvenomGenerator } from './msfvenom';
 import { searchsploitGenerator } from './searchsploit';
 import { routersploitGenerator } from './routersploit';
 import { theHarvesterGenerator } from './theharvester';
@@ -71,7 +70,6 @@ export const allGenerators: GeneratorConfig[] = [
   xsstrikeGenerator,
   medusaGenerator,
   cewlGenerator,
-  msfvenomGenerator,
   searchsploitGenerator,
   routersploitGenerator,
   theHarvesterGenerator,
