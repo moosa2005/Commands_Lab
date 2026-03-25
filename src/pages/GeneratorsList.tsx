@@ -22,30 +22,53 @@ export default function GeneratorsList() {
     }
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const queryParam = searchParams.get('q') || '';
   
-  const [searchQuery, setSearchQuery] = useState(queryParam);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  // URL as source of truth
+  const searchQueryURL = searchParams.get('q') || '';
+  const selectedCategory = searchParams.get('cat') || 'all';
+  
+  // Local state for input responsiveness
+  const [searchInput, setSearchInput] = useState(searchQueryURL);
 
-  // Update URL on search change
+  // Sync input when URL changes (e.g., browser back/forward)
   useEffect(() => {
-    if (searchQuery !== queryParam) {
-      if (searchQuery) {
-        setSearchParams({ q: searchQuery });
-      } else {
-        setSearchParams({});
+    setSearchInput(searchQueryURL);
+  }, [searchQueryURL]);
+
+  // Update URL on search change with debounce
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchInput !== searchQueryURL) {
+        const newParams = new URLSearchParams(searchParams);
+        if (searchInput) {
+          newParams.set('q', searchInput);
+        } else {
+          newParams.delete('q');
+        }
+        setSearchParams(newParams, { replace: true });
       }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchInput, searchQueryURL, setSearchParams, searchParams]);
+
+  const handleCategoryChange = (catId: string) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (catId === 'all') {
+      newParams.delete('cat');
+    } else {
+      newParams.set('cat', catId);
     }
-  }, [searchQuery, setSearchParams, queryParam]);
+    setSearchParams(newParams);
+  };
 
   const filteredGenerators = useMemo(() => {
     return allGenerators.filter(gen => {
-      const matchSearch = gen.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          gen.description.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchSearch = gen.name.toLowerCase().includes(searchInput.toLowerCase()) || 
+                          gen.description.toLowerCase().includes(searchInput.toLowerCase());
       const matchCategory = selectedCategory === 'all' || gen.categoryId === selectedCategory;
       return matchSearch && matchCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [searchInput, selectedCategory]);
 
   return (
     <div className="directory-container">
@@ -62,8 +85,8 @@ export default function GeneratorsList() {
           <input 
             type="text" 
             placeholder="Search for a tool..." 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
             className="search-input"
           />
         </div>
@@ -71,7 +94,7 @@ export default function GeneratorsList() {
         <div className="categories-list">
           <button 
             className={`category-pill ${selectedCategory === 'all' ? 'active' : ''}`}
-            onClick={() => setSelectedCategory('all')}
+            onClick={() => handleCategoryChange('all')}
           >
             All Tools
           </button>
@@ -79,7 +102,7 @@ export default function GeneratorsList() {
             <button 
               key={cat.id} 
               className={`category-pill ${selectedCategory === cat.id ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(cat.id)}
+              onClick={() => handleCategoryChange(cat.id)}
             >
               {cat.name}
             </button>
@@ -100,7 +123,7 @@ export default function GeneratorsList() {
           <p>Try adjusting your search or filter criteria.</p>
           <button 
             className="btn btn-secondary" 
-            onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
+            onClick={() => { setSearchInput(''); handleCategoryChange('all'); }}
           >
             Clear Filters
           </button>
