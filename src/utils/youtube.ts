@@ -26,86 +26,86 @@ export const TOPICS = [
 const CURRICULUM_VIDEOS: Record<string, YouTubeVideo> = {
   'CyberSecurity Fundamental': {
     id: '9HOpanT0GRs',
-    title: 'CyberSecurity Fundamental',
-    channelTitle: 'Cyber Security Course',
+    title: 'Harvard CS50’s Intro to Cybersecurity – Full University Course',
+    channelTitle: 'Harvard University / freeCodeCamp.org',
     thumbnailUrl: 'https://i.ytimg.com/vi/9HOpanT0GRs/hqdefault.jpg'
   },
   'Networking Basics': {
     id: 'J4Gx2mXbnZ4',
-    title: 'Networking Basics',
-    channelTitle: 'Cyber Security Course',
+    title: 'Network Fundamentals – Full Course',
+    channelTitle: 'freeCodeCamp.org',
     thumbnailUrl: 'https://i.ytimg.com/vi/J4Gx2mXbnZ4/hqdefault.jpg'
   },
   'Linux for hackers': {
     id: 'lZAoFs75_cs',
-    title: 'Linux for hackers',
-    channelTitle: 'Cyber Security Course',
+    title: 'Linux for Ethical Hackers – Full Course',
+    channelTitle: 'The Cyber Mentor / freeCodeCamp.org',
     thumbnailUrl: 'https://i.ytimg.com/vi/lZAoFs75_cs/hqdefault.jpg'
   },
   'Information gathering': {
     id: 'qwA6MmbeGNo',
-    title: 'Information gathering',
-    channelTitle: 'Cyber Security Course',
+    title: 'Information Gathering (Reconnaissance) - Ethical Hacking',
+    channelTitle: 'The Cyber Mentor',
     thumbnailUrl: 'https://i.ytimg.com/vi/qwA6MmbeGNo/hqdefault.jpg'
   },
   'Network scanning': {
     id: 'f6gwr333RZM',
-    title: 'Network scanning',
-    channelTitle: 'Cyber Security Course',
+    title: 'Network Scanning & Enumeration - Ethical Hacking',
+    channelTitle: 'The Cyber Mentor',
     thumbnailUrl: 'https://i.ytimg.com/vi/f6gwr333RZM/hqdefault.jpg'
   },
   'Web application security': {
     id: '1GJ_LwNw6sc',
-    title: 'Web application security',
-    channelTitle: 'Cyber Security Course',
+    title: 'Web Application Security & Bug Bounty - Full Course',
+    channelTitle: 'The Cyber Mentor',
     thumbnailUrl: 'https://i.ytimg.com/vi/1GJ_LwNw6sc/hqdefault.jpg'
   },
   'Vulnerability Analysis': {
     id: 'iLdsCnpMnTg',
-    title: 'Vulnerability Analysis',
-    channelTitle: 'Cyber Security Course',
+    title: 'Vulnerability Analysis & Assessment - Ethical Hacking',
+    channelTitle: 'The Cyber Mentor',
     thumbnailUrl: 'https://i.ytimg.com/vi/iLdsCnpMnTg/hqdefault.jpg'
   },
   'Sql injection': {
     id: '1nJgupaUPEQ',
-    title: 'Sql injection',
-    channelTitle: 'Cyber Security Course',
+    title: 'SQL Injection Training – Learn everything about SQLi',
+    channelTitle: 'Rana Khalil',
     thumbnailUrl: 'https://i.ytimg.com/vi/1nJgupaUPEQ/hqdefault.jpg'
   },
   'Xss': {
     id: '0GxLc2vsQVg',
-    title: 'Xss',
-    channelTitle: 'Cyber Security Course',
+    title: 'XSS Masterclass: Learn Cross-Site Scripting (XSS)',
+    channelTitle: 'Chef Secure',
     thumbnailUrl: 'https://i.ytimg.com/vi/0GxLc2vsQVg/hqdefault.jpg'
   },
   'Password attack': {
     id: 'z4_oqTZJqCo',
-    title: 'Password attack',
-    channelTitle: 'Cyber Security Course',
+    title: 'How to Crack Passwords – John the Ripper and Hashcat',
+    channelTitle: 'NetworkChuck',
     thumbnailUrl: 'https://i.ytimg.com/vi/z4_oqTZJqCo/hqdefault.jpg'
   },
   'Social engineering': {
     id: 'lJGmYl8erPw',
-    title: 'Social engineering',
-    channelTitle: 'Cyber Security Course',
+    title: 'Social Engineering: The Human Element of Hacking',
+    channelTitle: 'The Cyber Mentor',
     thumbnailUrl: 'https://i.ytimg.com/vi/lJGmYl8erPw/hqdefault.jpg'
   },
   'Reverse engineering': {
     id: '5FXrCHLAJZM',
-    title: 'Reverse engineering',
-    channelTitle: 'Cyber Security Course',
+    title: 'Reverse Engineering Full Course – For Beginners',
+    channelTitle: 'David Bombal',
     thumbnailUrl: 'https://i.ytimg.com/vi/5FXrCHLAJZM/hqdefault.jpg'
   },
   'Malware analysis': {
     id: 'qA0YcYMRWyI',
-    title: 'Malware analysis',
-    channelTitle: 'Cyber Security Course',
+    title: 'Practical Malware Analysis Full Course',
+    channelTitle: 'HuskyHacks',
     thumbnailUrl: 'https://i.ytimg.com/vi/qA0YcYMRWyI/hqdefault.jpg'
   },
   'Wifi attack': {
     id: 'rYA_BbgqbP4',
-    title: 'Wifi attack',
-    channelTitle: 'Cyber Security Course',
+    title: 'WiFi Hacking with Wifite – Full Course',
+    channelTitle: 'David Bombal',
     thumbnailUrl: 'https://i.ytimg.com/vi/rYA_BbgqbP4/hqdefault.jpg'
   }
 };

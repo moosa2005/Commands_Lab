@@ -39,7 +39,20 @@ export default function VideoPlayer({ video, isLoading }: VideoPlayerProps) {
           Now Playing
         </div>
         <h2 className="now-playing-title">{video.title}</h2>
-        <div className="now-playing-channel">{video.channelTitle}</div>
+        <div className="now-playing-meta">
+          <div className="now-playing-channel">
+            <Play size={12} fill="currentColor" style={{ marginRight: '6px', opacity: 0.8 }} />
+            {video.channelTitle}
+          </div>
+          <a 
+            href={`https://www.youtube.com/watch?v=${video.id}`} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="source-link"
+          >
+            Source: Original Video
+          </a>
+        </div>
       </div>
     </div>
   );
