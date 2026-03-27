@@ -35,8 +35,8 @@ export const wfuzzGenerator: GeneratorConfig = {
   ],
   generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['wfuzz -c'];
-    if (values.wordlist) parts.push(`-z file,${values.wordlist}`);
-    if (values.hideCode) parts.push(`--hc ${values.hideCode}`);
+    if (values.wordlist) parts.push(`-z file,${String(values.wordlist)}`);
+    if (values.hideCode) parts.push(`--hc ${String(values.hideCode)}`);
     if (values.url) parts.push(String(values.url));
     return parts.join(' ');
   },

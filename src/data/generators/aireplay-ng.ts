@@ -46,8 +46,8 @@ export const aireplayNgGenerator: GeneratorConfig = {
   generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['aireplay-ng'];
     if (values.attackType) parts.push(String(values.attackType));
-    if (values.bssid) parts.push(`-a ${values.bssid}`);
-    if (values.client) parts.push(`-c ${values.client}`);
+    if (values.bssid) parts.push(`-a ${String(values.bssid)}`);
+    if (values.client) parts.push(`-c ${String(values.client)}`);
     if (values.interface) parts.push(String(values.interface));
     return parts.join(' ');
   },

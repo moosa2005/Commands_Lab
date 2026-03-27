@@ -41,9 +41,9 @@ export const airodumpNgGenerator: GeneratorConfig = {
   generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['airodump-ng'];
     if (values.interface) parts.push(String(values.interface));
-    if (values.channel) parts.push(`-c ${values.channel}`);
-    if (values.bssid) parts.push(`--bssid ${values.bssid}`);
-    if (values.write) parts.push(`-w ${values.write}`);
+    if (values.channel) parts.push(`-c ${String(values.channel)}`);
+    if (values.bssid) parts.push(`--bssid ${String(values.bssid)}`);
+    if (values.write) parts.push(`-w ${String(values.write)}`);
     return parts.join(' ');
   },
   seo: {

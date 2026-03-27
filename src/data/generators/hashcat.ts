@@ -63,8 +63,8 @@ export const hashcatGenerator: GeneratorConfig = {
   ],
   generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['hashcat'];
-    if (values.hashType) parts.push(`-m ${values.hashType}`);
-    if (values.attackMode) parts.push(`-a ${values.attackMode}`);
+    if (values.hashType) parts.push(`-m ${String(values.hashType)}`);
+    if (values.attackMode) parts.push(`-a ${String(values.attackMode)}`);
     if (values.hashFile) parts.push(String(values.hashFile));
     if (values.wordlist) parts.push(String(values.wordlist));
     return parts.join(' ');

@@ -51,8 +51,8 @@ export const johnGenerator: GeneratorConfig = {
       return parts.join(' ');
     }
     
-    if (values.wordlist) parts.push(`--wordlist=${values.wordlist}`);
-    if (values.format) parts.push(`--format=${values.format}`);
+    if (values.wordlist) parts.push(`--wordlist=${String(values.wordlist)}`);
+    if (values.format) parts.push(`--format=${String(values.format)}`);
     if (values.hashFile) parts.push(String(values.hashFile));
     
     return parts.join(' ');
