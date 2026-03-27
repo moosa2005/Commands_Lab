@@ -29,7 +29,7 @@ export const bashGenerator: GeneratorConfig = {
       defaultValue: ''
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const target = values.target || '<target>';
     
     switch (values.task) {

@@ -20,9 +20,9 @@ export const maltegoGenerator: GeneratorConfig = {
       defaultValue: 'classic'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['maltego'];
-    if (values.target) parts.push(values.target);
+    if (values.target) parts.push(String(values.target));
     return parts.join(' ');
   },
   seo: {

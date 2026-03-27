@@ -32,13 +32,13 @@ export const netcatGenerator: GeneratorConfig = {
       defaultValue: 4444
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['nc'];
     if (values.listen) parts.push('-l');
     if (values.port) parts.push(`-p ${values.port}`);
     if (values.verbose) parts.push('-v');
-    if (values.target) parts.push(values.target);
-    if (!values.listen && values.port) parts.push(values.port);
+    if (values.target) parts.push(String(values.target));
+    if (!values.listen && values.port) parts.push(String(values.port));
     return parts.join(' ');
   },
   seo: {

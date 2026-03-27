@@ -1,7 +1,9 @@
+"use client";
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { TerminalSquare, Github, Menu, X } from 'lucide-react';
-import './Navbar.css';
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,14 +14,15 @@ export default function Navbar() {
   return (
     <header className="navbar-container">
       <div className="navbar-content">
-        <Link to="/" className="navbar-brand" onClick={closeMenu}>
+        <Link href="/" className="navbar-brand" onClick={closeMenu}>
           <TerminalSquare className="brand-icon" />
           <span className="brand-text">Commands<span className="brand-highlight">Lab</span></span>
         </Link>
         
         <nav className="navbar-links">
-          <Link to="/generators" className="nav-link">Tools</Link>
-          <Link to="/wordlist-generator" className="nav-link">Wordlist</Link>
+          <Link href="/generators" className="nav-link">Tools</Link>
+          <Link href="/wordlist-generator" className="nav-link">Wordlist</Link>
+          <Link href="/learning" className="nav-link">Learning</Link>
           <a href="https://github.com/moosa2005" target="_blank" rel="noopener noreferrer" className="nav-link icon-link">
             <Github size={20} />
             <span className="sr-only">GitHub</span>
@@ -45,9 +48,10 @@ export default function Navbar() {
               </button>
             </div>
             
-            <Link to="/generators" className="mobile-nav-link" onClick={closeMenu}>Tools Directory</Link>
-            <Link to="/wordlist-generator" className="mobile-nav-link" onClick={closeMenu}>Wordlist Generator</Link>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mobile-nav-link" onClick={closeMenu}>
+            <Link href="/generators" className="mobile-nav-link" onClick={closeMenu}>Tools Directory</Link>
+            <Link href="/wordlist-generator" className="mobile-nav-link" onClick={closeMenu}>Wordlist Generator</Link>
+            <Link href="/learning" className="mobile-nav-link" onClick={closeMenu}>Learning</Link>
+            <a href="https://github.com/moosa2005" target="_blank" rel="noopener noreferrer" className="mobile-nav-link" onClick={closeMenu}>
               <Github size={20} /> GitHub Project
             </a>
           </nav>

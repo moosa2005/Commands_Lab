@@ -23,7 +23,7 @@ export const wifiteGenerator: GeneratorConfig = {
       description: 'Attack all access points in range (--all)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['wifite'];
     if (values.interface) parts.push(`-i ${values.interface}`);
     if (values.all) parts.push('--all');

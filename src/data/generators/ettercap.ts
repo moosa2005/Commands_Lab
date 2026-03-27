@@ -33,7 +33,7 @@ export const ettercapGenerator: GeneratorConfig = {
       defaultValue: ''
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['ettercap'];
     if (values.textOnly) parts.push('-T');
     if (values.quiet) parts.push('-q');

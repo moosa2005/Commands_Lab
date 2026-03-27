@@ -1,35 +1,22 @@
+"use client";
+
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Terminal, Shield, Zap, Search } from 'lucide-react';
 import GeneratorCard from '../components/GeneratorCard';
 import { allGenerators } from '../data/generators';
-import { useSEO } from '../hooks/useSEO';
-import './Home.css';
+
+
 
 export default function Home() {
-  useSEO({
-    title: 'Kali Linux Command Generator - Free Online Pentesting Tool',
-    description: 'Free Kali Linux command generator for penetration testing. Generate Nmap, SQLMap, Hydra, Metasploit, Hashcat, reverse shell and other Kali Linux commands instantly. No signup required.',
-    keywords: 'kali linux command generator, kali linux commands, kali linux tools online, pentesting command generator, nmap command generator, cybersecurity tools, ethical hacking commands, penetration testing tools, hacking tools online free, kali linux cheat sheet, reverse shell generator, sqlmap commands, hydra brute force command, metasploit commands, gobuster commands, hashcat commands, john the ripper, ffuf fuzzing',
-    canonical: '/',
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'WebApplication',
-      'name': 'CommandsLab - Kali Linux Command Generator',
-      'url': 'https://commandslab.com',
-      'applicationCategory': 'SecurityApplication',
-      'operatingSystem': 'Web Browser',
-      'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
-      'description': 'Free online Kali Linux command generator for penetration testing and ethical hacking. Generate complex security commands instantly.'
-    }
-  });
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/generators?q=${encodeURIComponent(searchQuery)}`);
+      router.push(`/generators?q=${encodeURIComponent(searchQuery)}`);
     }
   };
 
@@ -68,7 +55,7 @@ export default function Home() {
         </form>
 
         <div className="hero-cta-group">
-          <Link to="/generators" className="btn btn-primary">
+          <Link href="/generators" className="btn btn-primary">
             <Terminal size={18} />
             Browse All Kali Linux Tools
           </Link>
@@ -83,7 +70,7 @@ export default function Home() {
       <section className="popular-section">
         <div className="section-header">
           <h2 className="section-title">Popular Kali Linux Command Generators</h2>
-          <Link to="/generators" className="view-all-link">View all &rarr;</Link>
+          <Link href="/generators" className="view-all-link">View all &rarr;</Link>
         </div>
         
         <div className="generators-grid">

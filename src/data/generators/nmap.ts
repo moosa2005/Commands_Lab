@@ -76,17 +76,17 @@ export const nmapGenerator: GeneratorConfig = {
       defaultValue: ''
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['nmap'];
     
-    if (values.scanType) parts.push(values.scanType);
+    if (values.scanType) parts.push(String(values.scanType));
     if (values.ports) parts.push(`-p ${values.ports}`);
     if (values.serviceVersions) parts.push('-sV');
     if (values.osDetection) parts.push('-O');
-    if (values.timing) parts.push(values.timing);
-    if (values.scripts) parts.push(values.scripts);
+    if (values.timing) parts.push(String(values.timing));
+    if (values.scripts) parts.push(String(values.scripts));
     
-    parts.push(values.target || '<target>');
+    parts.push(String(values.target || '<target>'));
     
     return parts.join(' ');
   },

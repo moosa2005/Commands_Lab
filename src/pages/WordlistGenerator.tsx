@@ -1,8 +1,10 @@
+"use client";
+
 import { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowLeft, Download, AlertTriangle } from 'lucide-react';
-import { useSEO } from '../hooks/useSEO';
-import './WordlistGenerator.css';
+
+
 
 const CHARSETS: Record<string, string> = {
   lowercase: 'abcdefghijklmnopqrstuvwxyz',
@@ -12,12 +14,6 @@ const CHARSETS: Record<string, string> = {
 };
 
 export default function WordlistGenerator() {
-  useSEO({
-    title: 'Wordlist Generator - Create Custom Password Lists Online',
-    description: 'Free online wordlist generator. Create custom wordlists for pentesting, brute force attacks, and security testing. Generate password lists with custom patterns, character sets, and rules.',
-    keywords: 'wordlist generator, password list generator, custom wordlist, brute force wordlist, pentesting wordlist, crunch online, password dictionary generator',
-    canonical: '/wordlist-generator',
-  });
 
   const [minLen, setMinLen] = useState(4);
   const [maxLen, setMaxLen] = useState(4);
@@ -128,7 +124,7 @@ export default function WordlistGenerator() {
 
   return (
     <div className="wl-container">
-      <Link to="/generators" className="back-link">
+      <Link href="/generators" className="back-link">
         <ArrowLeft size={16} /> Back to Directory
       </Link>
 

@@ -24,10 +24,10 @@ export const assetfinderGenerator: GeneratorConfig = {
       description: 'Only search for subdomains (--subs-only)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['assetfinder'];
     if (values.subsOnly) parts.push('--subs-only');
-    if (values.domain) parts.push(values.domain);
+    if (values.domain) parts.push(String(values.domain));
     return parts.join(' ');
   },
   seo: {

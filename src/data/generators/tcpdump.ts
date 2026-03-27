@@ -31,7 +31,7 @@ export const tcpdumpGenerator: GeneratorConfig = {
       description: 'Don\'t resolve names (-n)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['tcpdump'];
     if (values.interface) parts.push(`-i ${values.interface}`);
     if (values.filter) parts.push(`"${values.filter}"`);

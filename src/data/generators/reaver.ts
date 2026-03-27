@@ -32,7 +32,7 @@ export const reaverGenerator: GeneratorConfig = {
       description: 'Display extra information (-vv)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['reaver'];
     if (values.interface) parts.push(`-i ${values.interface}`);
     if (values.bssid) parts.push(`-b ${values.bssid}`);

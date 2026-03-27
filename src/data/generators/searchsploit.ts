@@ -24,9 +24,9 @@ export const searchsploitGenerator: GeneratorConfig = {
       description: 'Search for remote exploits'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['searchsploit'];
-    if (values.query) parts.push(values.query);
+    if (values.query) parts.push(String(values.query));
     if (values.mirror) parts.push('-m');
     if (values.examine) parts.push('-x');
     return parts.join(' ');

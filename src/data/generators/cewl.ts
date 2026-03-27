@@ -39,12 +39,12 @@ export const cewlGenerator: GeneratorConfig = {
       description: 'File to write to (-w)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['cewl'];
     if (values.depth) parts.push(`-d ${values.depth}`);
     if (values.minWordLength) parts.push(`-m ${values.minWordLength}`);
     if (values.output) parts.push(`-w ${values.output}`);
-    if (values.url) parts.push(values.url);
+    if (values.url) parts.push(String(values.url));
     return parts.join(' ');
   },
   seo: {

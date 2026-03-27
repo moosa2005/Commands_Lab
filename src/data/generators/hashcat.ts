@@ -61,12 +61,12 @@ export const hashcatGenerator: GeneratorConfig = {
       description: 'Ignore warnings (--force)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['hashcat'];
     if (values.hashType) parts.push(`-m ${values.hashType}`);
     if (values.attackMode) parts.push(`-a ${values.attackMode}`);
-    if (values.hashFile) parts.push(values.hashFile);
-    if (values.wordlist) parts.push(values.wordlist);
+    if (values.hashFile) parts.push(String(values.hashFile));
+    if (values.wordlist) parts.push(String(values.wordlist));
     return parts.join(' ');
   },
   seo: {

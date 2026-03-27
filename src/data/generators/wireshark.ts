@@ -33,7 +33,7 @@ export const wiresharkGenerator: GeneratorConfig = {
       description: 'Write to file (-w)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['tshark'];
     if (values.interface) parts.push(`-i ${values.interface}`);
     if (values.filter) parts.push(`-Y "${values.filter}"`);

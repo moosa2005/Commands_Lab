@@ -24,9 +24,9 @@ export const shodanGenerator: GeneratorConfig = {
       description: 'Number of results to return'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['shodan', values.queryType || 'search'];
-    if (values.query) parts.push(values.query);
+    if (values.query) parts.push(String(values.query));
     if (values.limit) parts.push(`--limit ${values.limit}`);
     return parts.join(' ');
   },

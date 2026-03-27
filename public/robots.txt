@@ -1,10 +1,4 @@
-# CommandsLab - robots.txt
 User-agent: *
 Allow: /
-Disallow: /api/
 
-# Sitemaps
 Sitemap: https://commandslab.com/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1

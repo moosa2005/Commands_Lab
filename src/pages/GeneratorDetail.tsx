@@ -1,48 +1,27 @@
-import { useParams, Link } from 'react-router-dom';
+"use client";
+
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import * as Icons from 'lucide-react';
+import Script from 'next/script';
 import FormEngine from '../components/FormEngine';
 import { allGenerators } from '../data/generators';
 import { categories } from '../data/categories';
-import { useSEO } from '../hooks/useSEO';
-import './GeneratorDetail.css';
+
+
 
 export default function GeneratorDetail() {
-  const { id } = useParams<{ id: string }>();
-  
+  const params = useParams();
+  const id = params?.id as string;
   const generator = allGenerators.find(g => g.id === id);
-
-  useSEO({
-    title: generator?.seo?.title || (generator
-      ? `${generator.name} Command Generator - Free Online Tool`
-      : 'Tool Not Found'),
-    description: generator?.seo?.description || (generator
-      ? `Generate ${generator.name} commands instantly with our free online tool. ${generator.description} No memorization needed — just configure and copy.`
-      : 'The command generator you are looking for does not exist.'),
-    keywords: generator?.seo?.keywords?.join(', ') || (generator
-      ? `${generator.name.toLowerCase()} command generator, ${generator.name.toLowerCase()} syntax, ${generator.name.toLowerCase()} cheat sheet, ${generator.name.toLowerCase()} tutorial, ${generator.name.toLowerCase()} options, pentesting commands`
-      : undefined),
-    canonical: generator ? `/generators/${generator.id}` : undefined,
-    structuredData: generator
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'SoftwareApplication',
-          'name': `${generator.name} Command Generator`,
-          'url': `https://commandslab.com/generators/${generator.id}`,
-          'applicationCategory': 'SecurityApplication',
-          'operatingSystem': 'Web Browser',
-          'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
-          'description': generator.description
-        }
-      : undefined
-  });
 
   if (!generator) {
     return (
       <div className="not-found-container">
         <h2>Tool Not Found</h2>
         <p>The command generator you are looking for does not exist.</p>
-        <Link to="/generators" className="btn btn-primary" style={{ marginTop: '1rem' }}>
+        <Link href="/generators" className="btn btn-primary" style={{ marginTop: '1rem' }}>
           Back to Directory
         </Link>
       </div>
@@ -54,7 +33,33 @@ export default function GeneratorDetail() {
 
   return (
     <div className="detail-container">
-      <Link to="/generators" className="back-link">
+      <Script id={`breadcrumb-${generator.id}`} type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://commandslab.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Generators",
+              "item": "https://commandslab.com/generators"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": generator.name,
+              "item": `https://commandslab.com/generators/${generator.id}`
+            }
+          ]
+        })}
+      </Script>
+      <Link href="/generators" className="back-link">
         <ArrowLeft size={16} /> Back to Directory
       </Link>
 

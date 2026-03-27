@@ -17,7 +17,7 @@ export const reconNgGenerator: GeneratorConfig = {
       defaultValue: ''
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['recon-ng'];
     if (values.workspace) parts.push(`-w ${values.workspace}`);
     if (values.runModule) parts.push(`-m ${values.runModule} -x "run"`);

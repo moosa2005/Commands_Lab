@@ -43,12 +43,12 @@ export const aireplayNgGenerator: GeneratorConfig = {
       defaultValue: ''
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['aireplay-ng'];
-    if (values.attackType) parts.push(values.attackType);
+    if (values.attackType) parts.push(String(values.attackType));
     if (values.bssid) parts.push(`-a ${values.bssid}`);
     if (values.client) parts.push(`-c ${values.client}`);
-    if (values.interface) parts.push(values.interface);
+    if (values.interface) parts.push(String(values.interface));
     return parts.join(' ');
   },
   seo: {

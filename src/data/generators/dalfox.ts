@@ -25,7 +25,7 @@ export const dalfoxGenerator: GeneratorConfig = {
       description: 'Add blind XSS payload'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['dalfox url', values.url || '<url>'];
     if (values.blind) parts.push(`-b ${values.blind}`);
     return parts.join(' ');

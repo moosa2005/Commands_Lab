@@ -17,9 +17,9 @@ export const whoisGenerator: GeneratorConfig = {
       defaultValue: ''
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['whois'];
-    if (values.target) parts.push(values.target);
+    if (values.target) parts.push(String(values.target));
     return parts.join(' ');
   },
   seo: {

@@ -45,7 +45,7 @@ export const medusaGenerator: GeneratorConfig = {
       defaultValue: 'ssh'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['medusa'];
     if (values.target) parts.push(`-h ${values.target}`);
     if (values.username) parts.push(`-u ${values.username}`);

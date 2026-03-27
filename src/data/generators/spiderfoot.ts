@@ -16,7 +16,7 @@ export const spiderfootGenerator: GeneratorConfig = {
       defaultValue: '127.0.0.1:5001'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['sf.py'];
     if (values.target) parts.push(`-t ${values.target}`);
     if (values.module) parts.push(`-m ${values.module}`);

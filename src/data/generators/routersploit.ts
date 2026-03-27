@@ -28,7 +28,7 @@ export const routersploitGenerator: GeneratorConfig = {
       defaultValue: 'scanners/autopwn'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['rsf.py'];
     if (values.module) parts.push(`-m ${values.module}`);
     if (values.target) parts.push(`-t ${values.target}`);

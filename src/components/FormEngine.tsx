@@ -1,25 +1,35 @@
-import { useState, useEffect } from 'react';
+"use client";
+
+import { useState } from 'react';
 import type { GeneratorField, GeneratorConfig } from '../types/generator';
 import CommandPreview from './CommandPreview';
-import './FormEngine.css';
+
 
 interface FormEngineProps {
   generator: GeneratorConfig;
 }
 
 export default function FormEngine({ generator }: FormEngineProps) {
-  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [currentGeneratorId, setCurrentGeneratorId] = useState(generator.id);
+  const [formData, setFormData] = useState<Record<string, string | boolean | number>>(() => {
+    const initialData: Record<string, string | boolean | number> = {};
+    generator.fields.forEach(field => {
+      initialData[field.id] = field.defaultValue !== undefined ? field.defaultValue : '';
+    });
+    return initialData;
+  });
 
-  // Initialize form data with default values
-  useEffect(() => {
-    const initialData: Record<string, any> = {};
+  // Re-initialize when generator changes to avoid useEffect looping
+  if (generator.id !== currentGeneratorId) {
+    setCurrentGeneratorId(generator.id);
+    const initialData: Record<string, string | boolean | number> = {};
     generator.fields.forEach(field => {
       initialData[field.id] = field.defaultValue !== undefined ? field.defaultValue : '';
     });
     setFormData(initialData);
-  }, [generator.id]); // Re-initialize when generator changes
+  }
 
-  const handleChange = (fieldId: string, value: any) => {
+  const handleChange = (fieldId: string, value: string | boolean | number) => {
     setFormData(prev => ({
       ...prev,
       [fieldId]: value
@@ -44,7 +54,7 @@ export default function FormEngine({ generator }: FormEngineProps) {
               type={field.type}
               className="form-control"
               placeholder={field.placeholder}
-              value={value}
+              value={typeof value === 'boolean' ? '' : value}
               onChange={(e) => handleChange(field.id, e.target.value)}
               required={field.required}
             />
@@ -62,7 +72,7 @@ export default function FormEngine({ generator }: FormEngineProps) {
               <select
                 id={field.id}
                 className="form-control form-select"
-                value={value}
+                value={typeof value === 'boolean' ? '' : value}
                 onChange={(e) => handleChange(field.id, e.target.value)}
                 required={field.required}
               >

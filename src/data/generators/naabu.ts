@@ -32,7 +32,7 @@ export const naabuGenerator: GeneratorConfig = {
       description: 'Packet rate (-rate)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['naabu'];
     if (values.target) parts.push(`-host ${values.target}`);
     if (values.ports) parts.push(`-p ${values.ports}`);

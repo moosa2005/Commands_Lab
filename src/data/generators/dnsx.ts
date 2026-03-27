@@ -32,7 +32,7 @@ export const dnsxGenerator: GeneratorConfig = {
       description: 'Use custom DNS resolvers'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['dnsx'];
     if (values.domain) parts.push(`-d ${values.domain}`);
     if (values.queryType) parts.push('-a -aaaa -cname -ns -mx -txt -ptr');

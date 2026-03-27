@@ -30,7 +30,7 @@ export const niktoGenerator: GeneratorConfig = {
       description: 'Enable SSL (-ssl)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['nikto'];
     if (values.host) parts.push(`-h ${values.host}`);
     if (values.port) parts.push(`-p ${values.port}`);

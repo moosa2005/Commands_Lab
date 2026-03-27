@@ -75,15 +75,15 @@ export const hydraGenerator: GeneratorConfig = {
       description: 'Number of parallel connects per target.'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['hydra'];
     if (values.login) parts.push(`-l ${values.login}`);
     if (values.password) parts.push(`-p ${values.password}`);
     if (values.loginList) parts.push(`-L ${values.loginList}`);
     if (values.passwordList) parts.push(`-P ${values.passwordList}`);
     if (values.threads) parts.push(`-t ${values.threads}`);
-    if (values.target) parts.push(values.target);
-    if (values.service) parts.push(values.service);
+    if (values.target) parts.push(String(values.target));
+    if (values.service) parts.push(String(values.service));
     return parts.join(' ');
   },
   seo: {

@@ -59,7 +59,7 @@ export const payloadGenerator: GeneratorConfig = {
       defaultValue: 'payload.exe'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['msfvenom', '-p', values.payload || 'windows/meterpreter/reverse_tcp'];
     if (values.lhost) parts.push(`LHOST=${values.lhost}`);
     if (values.lport) parts.push(`LPORT=${values.lport}`);

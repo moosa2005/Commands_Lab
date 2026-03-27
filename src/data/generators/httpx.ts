@@ -38,10 +38,10 @@ export const httpxGenerator: GeneratorConfig = {
       description: 'Number of threads (-t)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['httpx'];
     if (values.url) {
-      if (values.url.endsWith('.txt')) parts.push(`-l ${values.url}`);
+      if (String(values.url).endsWith('.txt')) parts.push(`-l ${values.url}`);
       else parts.push(`-u ${values.url}`);
     }
     if (values.showTitle) parts.push('-title');

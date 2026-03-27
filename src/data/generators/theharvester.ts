@@ -36,7 +36,7 @@ export const theHarvesterGenerator: GeneratorConfig = {
       description: 'Limit the number of search results (-l)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['theHarvester'];
     if (values.domain) parts.push(`-d ${values.domain}`);
     if (values.limit) parts.push(`-l ${values.limit}`);

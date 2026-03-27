@@ -28,10 +28,10 @@ export const tracerouteGenerator: GeneratorConfig = {
       defaultValue: ''
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['traceroute'];
-    if (values.method) parts.push(values.method);
-    if (values.target) parts.push(values.target);
+    if (values.method) parts.push(String(values.method));
+    if (values.target) parts.push(String(values.target));
     return parts.join(' ');
   },
   seo: {

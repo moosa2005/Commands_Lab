@@ -42,11 +42,11 @@ export const masscanGenerator: GeneratorConfig = {
       description: 'Disable pinging hosts prior to scanning (--ping=false)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['masscan'];
     
     if (values.ports) parts.push(`-p${values.ports}`);
-    if (values.target) parts.push(values.target);
+    if (values.target) parts.push(String(values.target));
     if (values.rate) parts.push(`--rate ${values.rate}`);
     // Masscan disables pinging by default in many scenarios, but explicitly added for clarity if checked.
     if (values.ping) parts.push('--ping=false');

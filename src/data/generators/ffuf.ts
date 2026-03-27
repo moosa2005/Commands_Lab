@@ -51,7 +51,7 @@ export const ffufGenerator: GeneratorConfig = {
       description: 'Comma separated list of status codes to filter out.'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['ffuf'];
     if (values.wordlist) parts.push(`-w ${values.wordlist}`);
     if (values.url) parts.push(`-u ${values.url}`);

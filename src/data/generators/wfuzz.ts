@@ -33,11 +33,11 @@ export const wfuzzGenerator: GeneratorConfig = {
       description: 'Hide responses with these codes (--hc)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['wfuzz -c'];
     if (values.wordlist) parts.push(`-z file,${values.wordlist}`);
     if (values.hideCode) parts.push(`--hc ${values.hideCode}`);
-    if (values.url) parts.push(values.url);
+    if (values.url) parts.push(String(values.url));
     return parts.join(' ');
   },
   seo: {

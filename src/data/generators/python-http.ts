@@ -23,7 +23,7 @@ export const pythonHttpGenerator: GeneratorConfig = {
       description: 'The directory to serve (-d)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const version = values.pythonVersion || '3';
     const port = values.port || 8080;
     const directory = values.directory;

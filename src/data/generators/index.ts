@@ -44,10 +44,12 @@ import { hashcatGenerator } from './hashcat';
 import { johnGenerator } from './john';
 import { metasploitGenerator } from './metasploit';
 import { payloadGenerator } from './payload';
-import { reverseShellGenerator } from './reverseShell';
+import { reverseShellGenerator } from './reverse-shell';
 import { curlGenerator } from './curl';
 import { base64Generator } from './base64';
 import { bashGenerator } from './bash';
+import { commixGenerator } from './commix';
+import { wpscanGenerator } from './wpscan';
 import { wordlistGenerator } from './wordlist';
 import type { GeneratorConfig } from '../../types/generator';
 
@@ -99,6 +101,8 @@ export const allGenerators: GeneratorConfig[] = [
   metasploitGenerator,
   payloadGenerator,
   reverseShellGenerator,
+  commixGenerator,
+  wpscanGenerator,
   curlGenerator,
   base64Generator,
   bashGenerator,

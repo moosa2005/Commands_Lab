@@ -5,8 +5,8 @@ export const sqlmapGenerator: GeneratorConfig = {
   name: 'SQLmap',
   description: 'Automate detecting and exploiting SQL injection flaws.',
   categoryId: 'web-testing',
-  exampleUsage: 'sqlmap -u "http://example.com/page?id=1" --dbs --batch',
-  explanation: 'SQLmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers.',
+  exampleUsage: 'sqlmap -u "http://example.com/id=1" --dbs --batch',
+  explanation: 'sqlmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers.',
   fields: [
     {
       id: 'url',
@@ -61,7 +61,7 @@ export const sqlmapGenerator: GeneratorConfig = {
       description: 'Never ask for user input, use the default behavior.'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['sqlmap'];
     if (values.url) parts.push(`-u "${values.url}"`);
     if (values.risk) parts.push(`--risk ${values.risk}`);

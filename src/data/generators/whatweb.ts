@@ -28,10 +28,10 @@ export const whatwebGenerator: GeneratorConfig = {
       defaultValue: '1'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['whatweb'];
     if (values.aggression) parts.push(`-a ${values.aggression}`);
-    if (values.url) parts.push(values.url);
+    if (values.url) parts.push(String(values.url));
     return parts.join(' ');
   },
   seo: {

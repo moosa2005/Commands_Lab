@@ -1,31 +1,32 @@
+"use client";
+
 import { useState, useMemo, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { Search } from 'lucide-react';
 import GeneratorCard from '../components/GeneratorCard';
 import { allGenerators } from '../data/generators';
 import { categories } from '../data/categories';
-import { useSEO } from '../hooks/useSEO';
-import './GeneratorsList.css';
+
+
 
 export default function GeneratorsList() {
-  useSEO({
-    title: 'All Pentesting & Hacking Command Generators',
-    description: 'Browse our complete collection of free cybersecurity command generators: Nmap, SQLMap, Hydra, Hashcat, Metasploit, reverse shells, Gobuster, FFUF, and more. Generate commands instantly without memorizing syntax.',
-    keywords: 'pentesting tools list, hacking command generators, cybersecurity tools directory, nmap sqlmap hydra hashcat metasploit commands, free hacking tools online, penetration testing cheat sheet',
-    canonical: '/generators',
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      'name': 'Pentesting Command Generators Directory',
-      'url': 'https://commandslab.com/generators',
-      'description': 'Complete collection of free cybersecurity command generators for penetration testing.'
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  
+  const setSearchParams = (params: URLSearchParams, options?: { replace?: boolean }) => {
+    const query = params.toString();
+    const url = `${pathname}${query ? `?${query}` : ''}`;
+    if (options?.replace) {
+      router.replace(url);
+    } else {
+      router.push(url);
     }
-  });
-  const [searchParams, setSearchParams] = useSearchParams();
+  };
   
   // URL as source of truth
-  const searchQueryURL = searchParams.get('q') || '';
-  const selectedCategory = searchParams.get('cat') || 'all';
+  const searchQueryURL = searchParams?.get('q') || '';
+  const selectedCategory = searchParams?.get('cat') || 'all';
   
   // Local state for input responsiveness
   const [searchInput, setSearchInput] = useState(searchQueryURL);
@@ -39,7 +40,7 @@ export default function GeneratorsList() {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchInput !== searchQueryURL) {
-        const newParams = new URLSearchParams(searchParams);
+        const newParams = new URLSearchParams(searchParams?.toString() || '');
         if (searchInput) {
           newParams.set('q', searchInput);
         } else {
@@ -52,7 +53,7 @@ export default function GeneratorsList() {
   }, [searchInput, searchQueryURL, setSearchParams, searchParams]);
 
   const handleCategoryChange = (catId: string) => {
-    const newParams = new URLSearchParams(searchParams);
+    const newParams = new URLSearchParams(searchParams?.toString() || '');
     if (catId === 'all') {
       newParams.delete('cat');
     } else {

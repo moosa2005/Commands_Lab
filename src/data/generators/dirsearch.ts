@@ -32,7 +32,7 @@ export const dirsearchGenerator: GeneratorConfig = {
       description: 'Number of threads (-t)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['dirsearch'];
     if (values.url) parts.push(`-u ${values.url}`);
     if (values.extensions) parts.push(`-e ${values.extensions}`);

@@ -105,17 +105,17 @@ export const wordlistGenerator: GeneratorConfig = {
       description: 'Reverse the order of characters in each generated word.'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['crunch'];
 
     // Min and Max length
-    parts.push(values.minLength || '6');
-    parts.push(values.maxLength || '8');
+    parts.push(String(values.minLength || '6'));
+    parts.push(String(values.maxLength || '8'));
 
     // Character set (if no pattern is used)
     if (!values.pattern) {
       const charset = values.charset === 'custom' ? (values.customCharset || '') : (values.charset || '');
-      if (charset) parts.push(charset);
+      if (charset) parts.push(String(charset));
     }
 
     // Pattern

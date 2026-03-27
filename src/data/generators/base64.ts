@@ -37,7 +37,7 @@ export const base64Generator: GeneratorConfig = {
       description: 'Save output to this filename.'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const input = values.input || '<input>';
     let cmd = '';
     

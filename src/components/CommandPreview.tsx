@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
-import './CommandPreview.css';
+
 
 interface CommandPreviewProps {
   command: string;

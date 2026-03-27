@@ -25,9 +25,9 @@ export const aircrackNgGenerator: GeneratorConfig = {
       defaultValue: ''
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['aircrack-ng'];
-    if (values.captureFile) parts.push(values.captureFile);
+    if (values.captureFile) parts.push(String(values.captureFile));
     if (values.wordlist) parts.push(`-w ${values.wordlist}`);
     return parts.join(' ');
   },

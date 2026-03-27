@@ -32,7 +32,7 @@ export const netdiscoverGenerator: GeneratorConfig = {
       description: 'Bind to a specific interface (-i)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['netdiscover'];
     if (values.range) parts.push(`-r ${values.range}`);
     if (values.passive) parts.push('-p');

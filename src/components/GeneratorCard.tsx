@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import * as Icons from 'lucide-react';
 import type { GeneratorConfig } from '../types/generator';
 import { categories } from '../data/categories';
-import './GeneratorCard.css';
+
 
 interface GeneratorCardProps {
   generator: GeneratorConfig;
@@ -15,7 +15,7 @@ export default function GeneratorCard({ generator }: GeneratorCardProps) {
   const IconComponent = category ? (Icons[category.iconName as keyof typeof Icons] as React.ElementType) : Icons.Terminal;
 
   return (
-    <Link to={`/generators/${generator.id}`} className="generator-card">
+    <Link href={`/generators/${generator.id}`} className="generator-card">
       <div className="card-header">
         <div className="card-icon-wrapper">
           {IconComponent && <IconComponent size={24} className="card-icon" />}

@@ -41,19 +41,19 @@ export const johnGenerator: GeneratorConfig = {
       description: 'Show cracked passwords only (--show)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['john'];
     
     if (values.show) {
       parts.push('--show');
       if (values.format) parts.push(`--format=${values.format}`);
-      if (values.hashFile) parts.push(values.hashFile);
+      if (values.hashFile) parts.push(String(values.hashFile));
       return parts.join(' ');
     }
     
     if (values.wordlist) parts.push(`--wordlist=${values.wordlist}`);
     if (values.format) parts.push(`--format=${values.format}`);
-    if (values.hashFile) parts.push(values.hashFile);
+    if (values.hashFile) parts.push(String(values.hashFile));
     
     return parts.join(' ');
   }

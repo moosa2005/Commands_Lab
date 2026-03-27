@@ -29,7 +29,7 @@ export interface GeneratorConfig {
   categoryId: string;
   fields: GeneratorField[];
   // Function to build the command string based on the form state
-  generateCommand: (values: Record<string, any>) => string;
+  generateCommand: (values: Record<string, string | boolean | number>) => string;
   exampleUsage: string;
   explanation: string;
   seo?: GeneratorSEO;

@@ -60,7 +60,7 @@ export const curlGenerator: GeneratorConfig = {
       description: 'Include the HTTP-header in the output (-i).'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['curl'];
     
     if (values.verbose) parts.push('-v');
@@ -71,7 +71,7 @@ export const curlGenerator: GeneratorConfig = {
     }
     
     if (values.headers) {
-      const headersArr = values.headers.split(',').map((h: string) => h.trim());
+      const headersArr = String(values.headers).split(',').map((h: string) => h.trim());
       headersArr.forEach((h: string) => {
         parts.push(`-H "${h}"`);
       });

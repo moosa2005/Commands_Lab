@@ -46,7 +46,7 @@ export const gobusterGenerator: GeneratorConfig = {
       description: 'Number of concurrent threads (default 10).'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['gobuster', values.mode || 'dir'];
     if (values.url) { // Changed from 'target' to 'url' to match existing field ID
       const flag = values.mode === 'dns' ? '-d' : '-u';

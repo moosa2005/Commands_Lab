@@ -31,7 +31,7 @@ export const subfinderGenerator: GeneratorConfig = {
       description: 'Number of threads to use (-t)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['subfinder'];
     if (values.domain) parts.push(`-d ${values.domain}`);
     if (values.silent) parts.push('-silent');

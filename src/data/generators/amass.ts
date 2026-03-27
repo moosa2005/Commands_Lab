@@ -50,7 +50,7 @@ export const amassGenerator: GeneratorConfig = {
       description: 'Enable brute forcing (-brute)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['amass', values.subcommand || 'enum'];
     if (values.domain) parts.push(`-d ${values.domain}`);
     if (values.passive) parts.push('-passive');

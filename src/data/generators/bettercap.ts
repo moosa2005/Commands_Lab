@@ -25,7 +25,7 @@ export const bettercapGenerator: GeneratorConfig = {
       description: 'Commands to run on startup (-eval)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['bettercap'];
     if (values.interface) parts.push(`-iface ${values.interface}`);
     if (values.command) parts.push(`-eval "${values.command}"`);

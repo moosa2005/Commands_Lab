@@ -24,7 +24,7 @@ export const xsstrikeGenerator: GeneratorConfig = {
       description: 'Crawl the target for links (--crawl)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['python3 xsstrike.py'];
     if (values.url) parts.push(`-u "${values.url}"`);
     if (values.crawl) parts.push('--crawl');

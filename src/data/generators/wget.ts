@@ -46,13 +46,13 @@ export const wgetGenerator: GeneratorConfig = {
       description: 'Do not ascend to the parent directory (-np)'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = ['wget'];
     if (values.recursive) parts.push('-r');
     if (values.noParent) parts.push('-np');
     if (values.output) parts.push(`-O ${values.output}`);
     if (values.background) parts.push('-b');
-    if (values.url) parts.push(values.url);
+    if (values.url) parts.push(String(values.url));
     return parts.join(' ');
   },
   seo: {

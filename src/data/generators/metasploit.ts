@@ -50,7 +50,7 @@ export const metasploitGenerator: GeneratorConfig = {
       description: 'Do not print the banner on startup (-q).'
     }
   ],
-  generateCommand: (values: any) => {
+  generateCommand: (values: Record<string, string | boolean | number>) => {
     const parts = [`msfconsole -x "use ${values.module || '<module>'};`];
     if (values.payload) parts.push(`set PAYLOAD ${values.payload};`);
     if (values.rhosts) parts.push(`set RHOSTS ${values.rhosts};`);
