@@ -2,7 +2,7 @@ import { allGenerators } from "@/data/generators";
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://commandslab.com";
+  const baseUrl = "https://commandslab.vercel.app";
 
   const generators = allGenerators.map((g) => ({
     url: `${baseUrl}/generators/${g.id}`,
