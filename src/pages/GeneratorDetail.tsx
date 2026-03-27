@@ -8,16 +8,13 @@ import Script from 'next/script';
 import FormEngine from '../components/FormEngine';
 import { allGenerators } from '../data/generators';
 import { categories } from '../data/categories';
-import type { GeneratorConfig } from '../types/generator';
 
-interface GeneratorDetailProps {
-  generator?: GeneratorConfig;
-}
 
-export default function GeneratorDetail({ generator: initialGenerator }: GeneratorDetailProps = {}) {
+
+export default function GeneratorDetail() {
   const params = useParams();
   const id = params?.id as string;
-  const generator = initialGenerator || allGenerators.find(g => g.id === id);
+  const generator = allGenerators.find(g => g.id === id);
 
   if (!generator) {
     return (

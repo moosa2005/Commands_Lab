@@ -6,6 +6,12 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
+export async function generateStaticParams() {
+  return allGenerators.map((generator) => ({
+    id: generator.id,
+  }));
+}
+
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
@@ -82,7 +88,7 @@ export default async function Page({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApp) }}
       />
-      <GeneratorDetail generator={generator} />
+      <GeneratorDetail />
     </>
   );
 }
