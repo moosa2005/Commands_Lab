@@ -32,7 +32,7 @@ export async function generateMetadata(
     openGraph: {
       title,
       description,
-      url: `https://commandslab.com/generators/${generator.id}`,
+      url: `https://commandslab.vercel.app/generators/${generator.id}`,
       siteName: 'CommandsLab',
       type: 'article',
       images: [
@@ -53,6 +53,36 @@ export async function generateMetadata(
   };
 }
 
-export default function Page() {
-  return <GeneratorDetail />;
+export default async function Page({ params }: Props) {
+  const id = (await params).id;
+  const generator = allGenerators.find((g: any) => g.id === id);
+
+  if (!generator) {
+    return <GeneratorDetail />;
+  }
+
+  const softwareApp = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": generator.name,
+    "operatingSystem": "Web",
+    "applicationCategory": "CybersecurityTool",
+    "description": generator.description,
+    "url": `https://commandslab.vercel.app/generators/${generator.id}`,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApp) }}
+      />
+      <GeneratorDetail />
+    </>
+  );
 }

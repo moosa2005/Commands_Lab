@@ -30,14 +30,14 @@ export const metadata: Metadata = {
   title: 'Kali Linux Command Generator - Free Online Pentesting Tool',
   description: 'Free Kali Linux command generator for penetration testing. Generate Nmap, SQLMap, Hydra, Metasploit, Hashcat, reverse shell and other Kali Linux commands instantly. No signup required.',
   keywords: 'kali linux command generator, kali linux commands, pentesting tools online, cyber security tools, nmap generator, reverse shell generator',
-  metadataBase: new URL('https://commandslab.com'),
+  metadataBase: new URL('https://commandslab.vercel.app'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'CommandsLab - Kali Linux Command Generator',
     description: 'Generate complex Kali Linux penetration testing commands instantly.',
-    url: 'https://commandslab.com',
+    url: 'https://commandslab.vercel.app',
     siteName: 'CommandsLab',
     locale: 'en_US',
     type: 'website',

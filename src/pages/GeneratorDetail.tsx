@@ -42,19 +42,19 @@ export default function GeneratorDetail() {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://commandslab.com/"
+              "item": "https://commandslab.vercel.app/"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Generators",
-              "item": "https://commandslab.com/generators"
+              "item": "https://commandslab.vercel.app/generators"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": generator.name,
-              "item": `https://commandslab.com/generators/${generator.id}`
+              "item": `https://commandslab.vercel.app/generators/${generator.id}`
             }
           ]
         })}
