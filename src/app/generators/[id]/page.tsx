@@ -82,7 +82,7 @@ export default async function Page({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApp) }}
       />
-      <GeneratorDetail />
+      <GeneratorDetail generator={generator} />
     </>
   );
 }
