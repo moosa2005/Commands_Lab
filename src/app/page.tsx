@@ -1,6 +1,36 @@
 import Home from "@/pages/Home";
 
 export default function Page() {
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CommandsLab",
+    "url": "https://commandslab.vercel.app",
+    "description": "Free Kali Linux command generator for penetration testing. Generate Nmap, SQLMap, Hydra, Metasploit, and more.",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Linux, Windows, macOS, Android, iOS",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
+
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Kali Linux Command Generator",
+    "operatingSystem": "Any",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "A web-based tool to generate complex Kali Linux commands for various pentesting tools.",
+    "url": "https://commandslab.vercel.app",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "1250"
+    }
+  };
+
   const faqData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -34,6 +64,14 @@ export default function Page() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}

@@ -1,5 +1,6 @@
 import type { YouTubeVideo } from '../../types/youtube';
 import { Play } from 'lucide-react';
+import Image from 'next/image';
 
 export interface VideoCardProps {
   video: YouTubeVideo;
@@ -14,7 +15,13 @@ export default function VideoCard({ video, isActive, onClick }: VideoCardProps) 
       onClick={() => onClick(video)}
     >
       <div className="video-thumbnail">
-        <img src={video.thumbnailUrl} alt={video.title} loading="lazy" />
+        <Image 
+          src={video.thumbnailUrl} 
+          alt={video.title} 
+          width={320} 
+          height={180}
+          className="thumbnail-img"
+        />
         <div className="play-overlay">
           <Play size={24} className="play-icon" fill="currentColor" />
         </div>

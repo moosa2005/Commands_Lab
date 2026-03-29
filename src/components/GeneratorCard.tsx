@@ -1,8 +1,31 @@
 import Link from 'next/link';
-import * as Icons from 'lucide-react';
+import { 
+  Network, 
+  Globe, 
+  Key, 
+  TerminalSquare, 
+  Wrench, 
+  BookText, 
+  Search, 
+  Wifi, 
+  Activity,
+  Terminal
+} from 'lucide-react';
 import type { GeneratorConfig } from '../types/generator';
 import { categories } from '../data/categories';
+import './GeneratorCard.css';
 
+const iconMap: Record<string, React.ElementType> = {
+  Network,
+  Globe,
+  Key,
+  TerminalSquare,
+  Wrench,
+  BookText,
+  Search,
+  Wifi,
+  Activity
+};
 
 interface GeneratorCardProps {
   generator: GeneratorConfig;
@@ -11,8 +34,8 @@ interface GeneratorCardProps {
 export default function GeneratorCard({ generator }: GeneratorCardProps) {
   const category = categories.find(c => c.id === generator.categoryId);
   
-  // Dynamically get the Lucide icon component
-  const IconComponent = category ? (Icons[category.iconName as keyof typeof Icons] as React.ElementType) : Icons.Terminal;
+  // Dynamically get the Lucide icon component from the map
+  const IconComponent = category ? (iconMap[category.iconName] || Terminal) : Terminal;
 
   return (
     <Link href={`/generators/${generator.id}`} className="generator-card">

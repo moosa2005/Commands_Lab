@@ -8,7 +8,7 @@ import Script from 'next/script';
 import FormEngine from '../components/FormEngine';
 import { allGenerators } from '../data/generators';
 import { categories } from '../data/categories';
-
+import './GeneratorDetail.css';
 
 
 export default function GeneratorDetail() {

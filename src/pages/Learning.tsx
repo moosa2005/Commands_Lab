@@ -8,6 +8,7 @@ import VideoPlayer from '../components/learning/VideoPlayer';
 import VideoList from '../components/learning/VideoList';
 import { TOPICS, fetchVideosForTopic } from '../utils/youtube';
 import type { YouTubeVideo } from '../types/youtube';
+import './Learning.css';
 
 
 export default function Learning() {

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { TerminalSquare, Github, Menu, X } from 'lucide-react';
+import './Navbar.css';
 
 
 export default function Navbar() {

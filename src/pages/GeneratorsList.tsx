@@ -6,8 +6,7 @@ import { Search } from 'lucide-react';
 import GeneratorCard from '../components/GeneratorCard';
 import { allGenerators } from '../data/generators';
 import { categories } from '../data/categories';
-
-
+import './GeneratorsList.css';
 
 export default function GeneratorsList() {
   const searchParams = useSearchParams();

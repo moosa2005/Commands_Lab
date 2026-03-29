@@ -6,16 +6,6 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Analytics } from "@vercel/analytics/react";
 import "../index.css";
 import "../App.css";
-import "../components/CommandPreview.css";
-import "../components/Footer.css";
-import "../components/FormEngine.css";
-import "../components/GeneratorCard.css";
-import "../components/Navbar.css";
-import "../pages/GeneratorDetail.css";
-import "../pages/GeneratorsList.css";
-import "../pages/Home.css";
-import "../pages/Learning.css";
-import "../pages/WordlistGenerator.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,19 +14,32 @@ export const viewport: Viewport = {
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 export const metadata: Metadata = {
-  title: 'Kali Linux Command Generator - Free Online Pentesting Tool',
-  description: 'Free Kali Linux command generator for penetration testing. Generate Nmap, SQLMap, Hydra, Metasploit, Hashcat, reverse shell and other Kali Linux commands instantly. No signup required.',
-  keywords: 'kali linux command generator, kali linux commands, pentesting tools online, cyber security tools, nmap generator, reverse shell generator',
+  title: 'Kali Linux Command Generator | Free Online Pentesting Tool',
+  description: 'Generate complex Kali Linux penetration testing commands instantly for Nmap, SQLMap, Hydra, Metasploit, Hashcat, and reverse shells. Free online pentesting tool.',
+  keywords: 'kali linux command generator, pentesting tool, nmap command generator, sqlmap commands, hydra brute force tool, metasploit commands, hashcat commands, reverse shell generator',
   metadataBase: new URL('https://commandslab.vercel.app'),
   alternates: {
     canonical: '/',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: 'CommandsLab - Kali Linux Command Generator',
-    description: 'Generate complex Kali Linux penetration testing commands instantly.',
+    title: 'Kali Linux Command Generator | Free Online Pentesting Tool',
+    description: 'Generate complex Kali Linux penetration testing commands instantly for Nmap, SQLMap, Hydra, Metasploit, Hashcat, and more. 100% free and private.',
     url: 'https://commandslab.vercel.app',
     siteName: 'CommandsLab',
     locale: 'en_US',
@@ -52,14 +55,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CommandsLab - Kali Linux Command Generator',
-    description: 'Generate complex Kali Linux penetration testing commands instantly.',
+    title: 'Kali Linux Command Generator | Free Online Pentesting Tool',
+    description: 'Generate complex Kali Linux penetration testing commands instantly for Nmap, SQLMap, Hydra, Metasploit, Hashcat, and more.',
     images: ['/og-image.png'],
+    creator: '@CommandsLab',
   },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/icon.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 };

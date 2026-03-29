@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Terminal, Shield, Zap, Search } from 'lucide-react';
 import GeneratorCard from '../components/GeneratorCard';
 import { allGenerators } from '../data/generators';
+import './Home.css';
 
 
 
@@ -35,8 +36,8 @@ export default function Home() {
           <span className="hero-highlight">Command Generator</span>
         </h1>
         <p className="hero-subtitle">
-          Generate complex Kali Linux penetration testing commands instantly — Nmap, SQLMap, Hydra, 
-          Metasploit, reverse shells, and more. Free online tool for ethical hackers and security professionals.
+          Generate complex Kali Linux penetration testing commands instantly for Nmap, SQLMap, Hydra, 
+          Metasploit, and reverse shells. The ultimate <strong>free online pentesting tool</strong> for ethical hackers.
         </p>
 
         <form className="hero-search" onSubmit={handleSearch} role="search" aria-label="Search Kali Linux command generators">
@@ -101,48 +102,37 @@ export default function Home() {
 
       {/* SEO Content Section */}
       <section className="seo-content-section">
-        <h2 className="seo-heading">The Best Free Kali Linux Command Generator Online</h2>
+        <h2 className="seo-heading">Free Online Kali Linux Command Generator & Pentesting Tool</h2>
         <div className="seo-text-grid">
           <article className="seo-text-block">
             <h3>What is CommandsLab?</h3>
             <p>
-              CommandsLab is a <strong>free online Kali Linux command generator</strong> designed for 
+              CommandsLab is a <strong>Kali Linux command generator</strong> designed for 
               cybersecurity professionals, ethical hackers, and penetration testers. Instead of memorizing 
-              complex command-line syntax for tools like <strong>Nmap</strong>, <strong>SQLMap</strong>, 
-              <strong>Hydra</strong>, <strong>Metasploit</strong>, <strong>Hashcat</strong>, and 
-              <strong>John the Ripper</strong>, simply select your desired options from our intuitive 
-              interface and get a ready-to-use command.
+              complex syntax for tools like <Link href="/generators/nmap">Nmap</Link>, <Link href="/generators/sqlmap">SQLMap</Link>, <Link href="/generators/hydra">Hydra</Link>, <Link href="/generators/metasploit">Metasploit</Link>, and <Link href="/generators/hashcat">Hashcat</Link>, simply select your options and get a ready-to-use command.
             </p>
           </article>
           <article className="seo-text-block">
-            <h3>Supported Kali Linux Tools</h3>
+            <h3>Nmap & SQLMap Commands</h3>
             <p>
-              We support all major <strong>Kali Linux penetration testing tools</strong> including: 
-              <strong>Nmap</strong> for network scanning, <strong>Masscan</strong> for fast port scanning, 
-              <strong>SQLMap</strong> for SQL injection, <strong>FFUF</strong> and <strong>Gobuster</strong> for 
-              directory brute forcing, <strong>Hydra</strong> for password attacks, <strong>Hashcat</strong> and 
-              <strong>John the Ripper</strong> for password cracking, <strong>Metasploit</strong> for exploitation, 
-              <strong>reverse shell generators</strong>, <strong>Curl</strong> command builder, and more.
+              We support all major penetration testing tools including <strong>Nmap command generator</strong> for network scanning, 
+              <strong>SQLMap commands</strong> for SQL injection, <strong>Hydra brute force tool</strong> for password attacks, 
+              <strong>Metasploit commands</strong> for exploitation, and <strong>reverse shell generator</strong> for post-exploitation.
             </p>
           </article>
           <article className="seo-text-block">
             <h3>Who Is This For?</h3>
             <p>
-              Whether you're a <strong>cybersecurity student</strong> learning Kali Linux, a 
-              <strong> CTF player</strong> solving challenges, a <strong>penetration tester</strong> on 
-              an engagement, or a <strong>bug bounty hunter</strong> looking for vulnerabilities — 
+              Whether you're a cybersecurity student, a CTF player, or a professional <strong>penetration tester</strong>, 
               CommandsLab helps you generate the right commands faster. Works perfectly as a 
-              <strong> Kali Linux cheat sheet</strong> and quick reference.
+              <strong>Kali Linux cheat sheet</strong> and quick reference for ethical hacking.
             </p>
           </article>
           <article className="seo-text-block">
             <h3>Why Use a Command Generator?</h3>
             <p>
-              Kali Linux has hundreds of tools with thousands of flags and options. Remembering every 
-              <strong> Nmap scan type</strong>, every <strong>SQLMap tamper script</strong>, or every 
-              <strong> Hydra protocol option</strong> is impractical. Our <strong>command generator</strong> lets 
-              you visually configure options and instantly get the correct syntax — saving time and 
-              reducing errors during security assessments.
+              Kali Linux has hundreds of tools with thousands of flags. Remembering every Nmap scan type or Hydra protocol option is impractical. Our <strong>command generator</strong> lets 
+              you visually configure options and instantly get the correct syntax — saving time during security assessments.
             </p>
           </article>
         </div>

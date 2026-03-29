@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import type { GeneratorField, GeneratorConfig } from '../types/generator';
 import CommandPreview from './CommandPreview';
-
+import { Info, ChevronDown, ChevronUp, Terminal, Shield, Zap } from 'lucide-react';
+import './FormEngine.css';
 
 interface FormEngineProps {
   generator: GeneratorConfig;

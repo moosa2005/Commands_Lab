@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Download, AlertTriangle } from 'lucide-react';
+import './WordlistGenerator.css';
 
 
 
