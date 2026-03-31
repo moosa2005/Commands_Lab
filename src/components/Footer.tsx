@@ -14,9 +14,9 @@ export default function Footer() {
           </a>
         </div>
         <div className="footer-links">
-          <Link href="/generators" className="footer-link">Kali Linux Tools</Link>
-          <Link href="/wordlist-generator" className="footer-link">Wordlist Generator</Link>
-          <Link href="/learning" className="footer-link">Learn Ethical Hacking</Link>
+          <Link href="/" className="footer-link">Home</Link>
+          <Link href="/generators" className="footer-link">Tool Library</Link>
+          <Link href="/learning" className="footer-link">Ethical Hacking Maps</Link>
         </div>
         <div className="footer-info">
           <p>&copy; {new Date().getFullYear()} CommandsLab. Free online <strong>Kali Linux command generator</strong>.</p>

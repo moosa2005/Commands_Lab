@@ -88,3 +88,47 @@
 .text-neon {
   color: var(--accent-neon);
 }
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .footer-links {
+    margin: 0;
+  }
+}
+
+.footer-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent-neon);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--accent-neon-glow);
+}
+
+.footer-link:hover {
+  color: var(--text-main);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}

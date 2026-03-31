@@ -124,6 +124,43 @@ export default function FormEngine({ generator }: FormEngineProps) {
       <div className="command-preview-section">
         <h2 className="section-title">Generated Command</h2>
         <CommandPreview command={currentCommand} />
+        
+        <div className="command-breakdown">
+          <h3 className="breakdown-title">
+            <Terminal size={18} />
+            Command Breakdown
+          </h3>
+          <ul className="breakdown-list">
+            <li className="breakdown-item">
+              <span className="breakdown-label">Tool:</span>
+              <span className="breakdown-value">{generator.name}</span>
+              <span className="breakdown-desc"> &mdash; {generator.description}</span>
+            </li>
+            {generator.fields.map(field => {
+              const val = formData[field.id];
+              if (val !== undefined && val !== '' && val !== false) {
+                let displayValue = String(val);
+                if (field.type === 'select' && field.options) {
+                  const selectedOption = field.options.find(opt => opt.value === val);
+                  if (selectedOption) {
+                    displayValue = selectedOption.label;
+                  }
+                } else if (field.type === 'checkbox') {
+                  displayValue = 'Enabled';
+                }
+
+                return (
+                  <li key={field.id} className="breakdown-item">
+                    <span className="breakdown-label">{field.label}:</span>
+                    <span className="breakdown-value">{displayValue}</span>
+                    {field.description && <span className="breakdown-desc"> &mdash; {field.description}</span>}
+                  </li>
+                );
+              }
+              return null;
+            })}
+          </ul>
+        </div>
       </div>
 
       <div className="explanation-section">
